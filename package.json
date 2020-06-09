@@ -1,0 +1,80 @@
+{
+  "name": "browserchess",
+  "version": "1.0.0",
+  "description": "A browser based, object oriented implementation of the classic game of Chess.",
+  "main": "index.js",
+  "scripts": {
+    "test": "nodemon --exec \\\"mocha tests/ --recursive --timeout=3000 -R min\\\""
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/JeremyMCastillo/BrowserChess.git"
+  },
+  "keywords": [
+    "javascript",
+    "chess",
+    "game",
+    "oop"
+  ],
+  "author": "Jeremy Castillo and Derek Dyer",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/JeremyMCastillo/BrowserChess/issues"
+  },
+  "homepage": "https://github.com/JeremyMCastillo/BrowserChess#readme",
+  "dependencies": {
+    "body-parser": "^1.19.0",
+    "express": "^4.17.1",
+    "http": "0.0.1-security",
+    "jsonwebtoken": "^8.5.1",
+    "lodash": "^4.17.15",
+    "mongoose": "^5.9.18",
+    "winston": "^3.2.1",
+    "winston-daily-rotate-file": "^4.4.2"
+  },
+  "devDependencies": {
+    "chai": "^4.2.0",
+    "chai-http": "^4.3.0",
+    "eslint": "^7.2.0",
+    "eslint-config-airbnb-base": "^14.1.0",
+    "eslint-plugin-import": "^2.21.1",
+    "mocha": "^7.2.0",
+    "prettier-eslint": "^11.0.0"
+  },
+  "eslintConfig": {
+    "extends": "airbnb-base",
+    "env": {
+      "es6": true,
+      "browser": true,
+      "mocha": true
+    },
+    "rules": {
+      "linebreak-style": 0,
+      "radix": 0,
+      "no-param-reassign": 0,
+      "func-names": 0,
+      "vars-on-top": 0,
+      "no-use-before-define": 0,
+      "no-underscore-dangle": 0,
+      "operator-linebreak": 0,
+      "global-require": 0,
+      "brace-style": [
+        "error",
+        "stroustrup"
+      ],
+      "comma-dangle": [
+        "error",
+        "never"
+      ],
+      "no-unused-vars": [
+        "warn"
+      ],
+      "no-var": [
+        "off"
+      ],
+      "one-var": [
+        "off"
+      ]
+    }
+  }
+}
