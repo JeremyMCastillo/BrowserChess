@@ -1,22 +1,41 @@
+const PieceType = {
+  pawn: 'pawn',
+  rook: 'rook',
+  knight: 'knight',
+  bishop: 'bishop',
+  king: 'king',
+  queen: 'queen'
+};
+
+const PieceColor = {
+  white: 'white',
+  black: 'black'
+};
+
 class Piece {
-    constructor(type, color, movement) {
-      this.type = type,
-      this.color = color,
-      this.movement = null
+  constructor(type, color) {
+    if (!PieceType[type]) {
+      throw Error('Invalid Piece Type');
     }
-  
-    getType() {
-      return this.type;
+    if (!PieceColor[color]) {
+      throw Error('Invalid Piece Color');
     }
 
-    getColor() {
-        return this.color
-    }
-
-    updateMove(movement) {
-        this.movement = movement
-    }
+    this.type = type;
+    this.color = color;
   }
-  
-  module.exports = { Player };
-  
+
+  getType() {
+    return this.type;
+  }
+
+  getColor() {
+    return this.color;
+  }
+
+  updateMove(movement) {
+    this.movement = movement;
+  }
+}
+
+module.exports = { Piece, PieceType, PieceColor };
