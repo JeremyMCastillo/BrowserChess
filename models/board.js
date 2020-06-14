@@ -1,4 +1,5 @@
-import Player from './players';
+import { Player } from './players';
+import { Cell } from './cells';
 
 const _ = require('lodash');
 
@@ -17,7 +18,7 @@ var BoardSchema = new mongoose.Schema({
   // player_2: [Player, {playerId: mongoose.ObjectId}]
   // Intantiate board with player class and it's properties
   player_1: [Player],
-  player_2: [Player]
+  player_2: [Player],
 
   /* matrix:
     Where we initialize with a 2D array and hashes represent initial spaces
@@ -33,6 +34,7 @@ var BoardSchema = new mongoose.Schema({
         [#,#,#,#,#,#,#,#],
     ]
     */
+  matrix: [[Cell]]
 });
 
 BoardSchema.methods.init = function () {
@@ -52,6 +54,12 @@ BoardSchema.methods.toJson = function () {
   var boardObject = board.toObject();
   // grid id, player 1 id, player 2 id
   return _.pick(boardObject, ['_id', 'player_1', 'player_2']);
+};
+
+// Returns true if there is a piece occupying the cell located at
+// parameters x and y. The piece property of an unoccupied cell is null.
+BoardSchema.methods.hasPieceAt = function (x, y) {
+  return this.matrix[x][y].piece !== null;
 };
 
 var Board = mongoose.model('Board', BoardSchema);
