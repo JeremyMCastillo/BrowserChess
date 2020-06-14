@@ -60,7 +60,7 @@
       "global-require": 0,
       "brace-style": [
         "error",
-        "stroustrup"
+        "1tbs"
       ],
       "comma-dangle": [
         "error",
