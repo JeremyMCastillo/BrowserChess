@@ -1,5 +1,5 @@
-import { Piece, PieceType } from './pieces';
-import { Cell } from './cells';
+import { Piece, PieceType } from "./pieces";
+import { Cell } from "./cells";
 
 class Rook extends Piece {
   constructor(color, x, y) {
@@ -9,10 +9,10 @@ class Rook extends Piece {
   }
 
   getValidMoves(board) {
-    var currentX = this.x;
-    var currentY = this.y;
-    var validMoves = [];
-    var i = 0;
+    let currentX = this.x;
+    let currentY = this.y;
+    let validMoves = [];
+    let i = 0;
 
     for (i = currentX - 1; i >= 0; i -= 1) {
       if (board.hasPieceAt(i, currentY)) {
