@@ -12,9 +12,8 @@ class Pawn extends Piece {
     let currentX = this.x;
     let currentY = this.y;
     let validMoves = [];
-    let i = 0;
     // logic for move
-    for (i = 0; i <= 1; i += 1) {
+    for (let i = 0; i < 1; i++) {
       if (board.hasPieceAt(currentX + 1, currentY + 1)) {
         if (board.matrix[currentX + 1][currentY + 1].piece.getColor() !== this.color) {
           // when capturing a piece we can change files
