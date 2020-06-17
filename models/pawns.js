@@ -1,5 +1,5 @@
-import { Piece, PieceType } from "./pieces";
-import { Cell } from "./cells";
+const { Piece, PieceType } = require('./pieces');
+const { Cell } = require('./cells');
 
 class Pawn extends Piece {
   constructor(color, x, y) {
@@ -16,13 +16,19 @@ class Pawn extends Piece {
     // logic for move
     for (i = 0; i <= 1; i += 1) {
       if (board.hasPieceAt(currentX + 1, currentY + 1)) {
-        if (board.matrix[currentX + 1][currentY + 1].piece.getColor() !== this.color) {
+        if (
+          board.matrix[currentX + 1][currentY + 1].piece.getColor() !==
+          this.color
+        ) {
           // when capturing a piece we can change files
           validMoves.push(new Cell(currentX + 1, currentY + 1));
         }
         break;
       } else if (board.hasPieceAt(currentX + 1, currentY - 1)) {
-        if (board.matrix[currentX + 1][currentY - 1].piece.getColor() !== this.color) {
+        if (
+          board.matrix[currentX + 1][currentY - 1].piece.getColor() !==
+          this.color
+        ) {
           // when capturing a piece we can change files
           validMoves.push(new Cell(currentX + 1, currentY - 1));
         }

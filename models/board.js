@@ -1,9 +1,6 @@
-import { Player } from './players';
-import { Cell } from './cells';
-
 const _ = require('lodash');
-
-// import Cell from './cells';
+const { Player } = require('./players');
+const { Cell } = require('./cells');
 
 const { mongoose } = require('../system/mongoose');
 
@@ -17,8 +14,8 @@ var BoardSchema = new mongoose.Schema({
   // player_1: [Player, {playerId: mongoose.ObjectId}],
   // player_2: [Player, {playerId: mongoose.ObjectId}]
   // Intantiate board with player class and it's properties
-  player_1: [Player],
-  player_2: [Player],
+  player_1: [Object],
+  player_2: [Object],
 
   /* matrix:
     Where we initialize with a 2D array and hashes represent initial spaces
@@ -34,7 +31,7 @@ var BoardSchema = new mongoose.Schema({
         [#,#,#,#,#,#,#,#],
     ]
     */
-  matrix: [[Cell]]
+  matrix: [[Object]]
 });
 
 BoardSchema.methods.init = function () {

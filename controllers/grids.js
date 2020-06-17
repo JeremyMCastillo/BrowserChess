@@ -1,5 +1,5 @@
 const _ = require('lodash');
-const { Player } = require('../models/players');
+const Player = require('../models/players');
 
 var route = (app) => {
   app.post('/grids/createNew', (req, res) => {
