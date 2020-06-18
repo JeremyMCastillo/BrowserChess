@@ -1,6 +1,4 @@
 const _ = require('lodash');
-const { Player } = require('./players');
-const { Cell } = require('./cells');
 
 const { mongoose } = require('../system/mongoose');
 
@@ -57,6 +55,11 @@ BoardSchema.methods.toJson = function () {
 // parameters x and y. The piece property of an unoccupied cell is null.
 BoardSchema.methods.hasPieceAt = function (x, y) {
   return this.matrix[x][y].piece !== null;
+};
+
+// Places piece on the board based on the pieces x and y properties
+BoardSchema.methods.setPiece = function (piece) {
+  this.matrix[piece.x][piece.y].piece = piece;
 };
 
 var Board = mongoose.model('Board', BoardSchema);
