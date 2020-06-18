@@ -1,5 +1,5 @@
-const { Piece, PieceType } = require("./pieces");
-const { Cell } = require("./cells");
+const { Piece, PieceType } = require('./pieces');
+const { Cell } = require('./cells');
 
 class Knight extends Piece {
   constructor(color, x, y) {
@@ -49,7 +49,7 @@ class Knight extends Piece {
           validMoves.push(new Cell(currentX - 1, currentY + 2));
         }
         break;
-        //back / right
+        // back / right
       } else if (board.hasPieceAt(currentX - 2, currentY + 1)) {
         if (
           board.matrix[currentX - 2][currentY + 1].piece.getColor() !==
@@ -58,7 +58,7 @@ class Knight extends Piece {
           validMoves.push(new Cell(currentX - 2, currentY + 1));
         }
         break;
-        //back / left
+        // back / left
       } else if (board.hasPieceAt(currentX - 2, currentY - 1)) {
         if (
           board.matrix[currentX - 2][currentY - 1].piece.getColor() !==
@@ -67,7 +67,7 @@ class Knight extends Piece {
           validMoves.push(new Cell(currentX - 2, currentY - 1));
         }
         break;
-        //left /advance
+        // left /advance
       } else if (board.hasPieceAt(currentX + 1, currentY + 2)) {
         if (
           board.matrix[currentX + 1][currentY + 2].piece.getColor() !==
@@ -76,7 +76,7 @@ class Knight extends Piece {
           validMoves.push(new Cell(currentX + 1, currentY + 2));
         }
         break;
-        //left / retreat
+        // left / retreat
       } else if (board.hasPieceAt(currentX - 1, currentY - 2)) {
         if (
           board.matrix[currentX - 1][currentY - 2].piece.getColor() !==
