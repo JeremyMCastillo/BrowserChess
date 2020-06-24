@@ -13,4 +13,15 @@ describe('Kings model', () => {
         assert.equal(king.color, PieceColor.white);
       });
     });
+
+    describe('King movement', () => {
+        it('should test king movement on an empty board', () => {
+          let king = new King(PieceColor.white, 4, 3);
+          let board = TestHelpers.initEmptyBoard();
+          let possibleMoves = king.getValidMoves(board);
+    
+          assert.isTrue(possibleMoves.length > 0);
+          assert.equal(possibleMoves.length, 8);
+      });
+   });
 });
