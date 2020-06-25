@@ -8,6 +8,11 @@ const { King } = require("../../models/kings");
 const { Queen } = require("../../models/queens");
 const { TestHelpers } = require("../helpers");
 
+/*
+TODO:
+    Write tests that specifically check whether a piece exists on a certain cell of the board
+*/
+
 describe("initialize player pieces", () => {
   it("should test white piece placement on board", () => {
     let board = TestHelpers.initEmptyBoard();
