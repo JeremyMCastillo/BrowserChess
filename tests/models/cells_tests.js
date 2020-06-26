@@ -56,6 +56,7 @@ describe("initialize player pieces", () => {
     // Assert
     assert.isTrue(validMoves.some((cell) => cell.x === 2 && cell.y === 0));
     assert.isFalse(validMoves.some((cell) => cell.x === 2 && cell.y === 1));
+    assert.isFalse(TestHelpers.board.isEmpty());
   });
 
   it("should test black piece placement on board", () => {
@@ -100,5 +101,9 @@ describe("initialize player pieces", () => {
     // Assert
     assert.isTrue(validMoves.some((cell) => cell.x === 5 && cell.y === 0));
     assert.isFalse(validMoves.some((cell) => cell.x === 5 && cell.y === 1));
+
+    //TODO: 
+    // Write a helper in helpers.js for checking an empty board
+    // assert.isFalse(TestHelpers.board.isEmpty()); 
   });
 });
