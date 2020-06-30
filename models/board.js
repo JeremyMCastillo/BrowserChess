@@ -62,6 +62,11 @@ BoardSchema.methods.setPiece = function (piece) {
   this.matrix[piece.x][piece.y].piece = piece;
 };
 
+// Returns true if the board is empty
+BoardSchema.methods.isEmpty = function () {
+  return !this.matrix.some((rows) => rows.some((cell) => cell.piece !== null));
+};
+
 var Board = mongoose.model('Board', BoardSchema);
 
 module.exports = { Board };

@@ -39,32 +39,32 @@ describe('Pawns model', () => {
     });
 
     it('should be able to capture an opposing rank piece', () => {
-        let queen = new Queen(PieceColor.white, 3, 4);
-        let queen2 = new Queen(PieceColor.black, 4, 4);
-        let board = TestHelpers.initEmptyBoard();
-        board.setPiece(queen);
-        board.setPiece(queen2);
-  
-        // Act
-        let validMoves = queen.getValidMoves(board);
-  
-        // Assert
-        assert.isTrue(validMoves.some((cell) => cell.x === 4 && cell.y === 4));
-      });
+      let queen = new Queen(PieceColor.white, 3, 4);
+      let queen2 = new Queen(PieceColor.black, 4, 4);
+      let board = TestHelpers.initEmptyBoard();
+      board.setPiece(queen);
+      board.setPiece(queen2);
 
-      it('should be able to capture an opposing file piece', () => {
-        let queen = new Queen(PieceColor.white, 3, 4);
-        let queen2 = new Queen(PieceColor.black, 3, 3);
-        let board = TestHelpers.initEmptyBoard();
-        board.setPiece(queen);
-        board.setPiece(queen2);
-  
-        // Act
-        let validMoves = queen.getValidMoves(board);
-  
-        // Assert
-        assert.isTrue(validMoves.some((cell) => cell.x === 3 && cell.y === 3));
-      });
+      // Act
+      let validMoves = queen.getValidMoves(board);
+
+      // Assert
+      assert.isTrue(validMoves.some((cell) => cell.x === 4 && cell.y === 4));
+    });
+
+    it('should be able to capture an opposing file piece', () => {
+      let queen = new Queen(PieceColor.white, 3, 4);
+      let queen2 = new Queen(PieceColor.black, 3, 3);
+      let board = TestHelpers.initEmptyBoard();
+      board.setPiece(queen);
+      board.setPiece(queen2);
+
+      // Act
+      let validMoves = queen.getValidMoves(board);
+
+      // Assert
+      assert.isTrue(validMoves.some((cell) => cell.x === 3 && cell.y === 3));
+    });
 
     it('should not be able to capture a friendly diagonal piece', () => {
       let queen = new Queen(PieceColor.white, 3, 4);
@@ -74,38 +74,38 @@ describe('Pawns model', () => {
       board.setPiece(queen2);
 
       // Act
-      let validMoves = whitePawn.getValidMoves(board);
+      let validMoves = queen.getValidMoves(board);
 
       // Assert
       assert.isFalse(validMoves.some((cell) => cell.x === 4 && cell.y === 3));
     });
 
     it('should not be able to capture a friendly rank piece', () => {
-        let queen = new Queen(PieceColor.white, 3, 4);
-        let queen2 = new Queen(PieceColor.white, 4, 4);
-        let board = TestHelpers.initEmptyBoard();
-        board.setPiece(queen);
-        board.setPiece(queen2);
-  
-        // Act
-        let validMoves = whitePawn.getValidMoves(board);
-  
-        // Assert
-        assert.isFalse(validMoves.some((cell) => cell.x === 4 && cell.y === 4));
-      });
+      let queen = new Queen(PieceColor.white, 3, 4);
+      let queen2 = new Queen(PieceColor.white, 4, 4);
+      let board = TestHelpers.initEmptyBoard();
+      board.setPiece(queen);
+      board.setPiece(queen2);
+
+      // Act
+      let validMoves = queen.getValidMoves(board);
+
+      // Assert
+      assert.isFalse(validMoves.some((cell) => cell.x === 4 && cell.y === 4));
+    });
 
     it('should not be able to capture a friendly file piece', () => {
-        let queen = new Queen(PieceColor.white, 3, 4);
-        let queen2 = new Queen(PieceColor.white, 3, 3);
-        let board = TestHelpers.initEmptyBoard();
-        board.setPiece(queen);
-        board.setPiece(queen2);
-  
-        // Act
-        let validMoves = whitePawn.getValidMoves(board);
-  
-        // Assert
-        assert.isFalse(validMoves.some((cell) => cell.x === 3 && cell.y === 3));
-      });
+      let queen = new Queen(PieceColor.white, 3, 4);
+      let queen2 = new Queen(PieceColor.white, 3, 3);
+      let board = TestHelpers.initEmptyBoard();
+      board.setPiece(queen);
+      board.setPiece(queen2);
+
+      // Act
+      let validMoves = queen.getValidMoves(board);
+
+      // Assert
+      assert.isFalse(validMoves.some((cell) => cell.x === 3 && cell.y === 3));
+    });
   });
 });

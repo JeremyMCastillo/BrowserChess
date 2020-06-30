@@ -26,7 +26,7 @@ describe('Pawns model', () => {
 
     it('should be able to capture an opposing piece', () => {
       let whitePawn = new Pawn(PieceColor.white, 3, 4);
-      let blackPawn = new Pawn(PieceColor.black, 4, 3);
+      let blackPawn = new Pawn(PieceColor.black, 2, 5);
       let board = TestHelpers.initEmptyBoard();
       board.setPiece(whitePawn);
       board.setPiece(blackPawn);
@@ -35,7 +35,7 @@ describe('Pawns model', () => {
       let validMoves = whitePawn.getValidMoves(board);
 
       // Assert
-      assert.isTrue(validMoves.some((cell) => cell.x === 4 && cell.y === 3));
+      assert.isTrue(validMoves.some((cell) => cell.x === 2 && cell.y === 5));
     });
 
     it('should not be able to capture a friendly piece', () => {
