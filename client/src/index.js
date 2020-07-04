@@ -4,8 +4,19 @@ import './index.css';
 import App from './App';
 import * as serviceWorker from './serviceWorker';
 
+class Doc extends React.Component {
+  componentDidMount() {
+    document.title = 'Browser Chess';
+  }
+
+  render() {
+    return <div />;
+  }
+}
+
 ReactDOM.render(
   <React.StrictMode>
+    <Doc />
     <App />
   </React.StrictMode>,
   document.getElementById('root')
