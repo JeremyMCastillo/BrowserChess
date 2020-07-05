@@ -7,7 +7,7 @@
     "start": "node index.js",
     "start-watch": "nodemon index.js",
     "dev": "concurrently \"yarn run start-watch\" \"cd client && yarn start\"",
-    "test": "nodemon --exec \\\"mocha tests/ --recursive --timeout=3000 -R min\\\""
+    "test": "nodemon --exec \\\"mocha tests/ --recursive --timeout=3000\\\""
   },
   "repository": {
     "type": "git",

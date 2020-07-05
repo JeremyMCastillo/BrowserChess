@@ -8,6 +8,7 @@ var BoardSchema = new mongoose.Schema({
     type: Date,
     default: Date.now
   },
+  game_code: String,
   // Instantiating player ID on board generation
   // player_1: [Player, {playerId: mongoose.ObjectId}],
   // player_2: [Player, {playerId: mongoose.ObjectId}]
@@ -48,7 +49,7 @@ BoardSchema.methods.toJson = function () {
   var board = this;
   var boardObject = board.toObject();
   // grid id, player 1 id, player 2 id
-  return _.pick(boardObject, ['_id', 'player_1', 'player_2']);
+  return _.pick(boardObject, ['player_1', 'player_2', 'game_code', 'matrix']);
 };
 
 // Returns true if there is a piece occupying the cell located at
@@ -65,6 +66,27 @@ BoardSchema.methods.setPiece = function (piece) {
 // Returns true if the board is empty
 BoardSchema.methods.isEmpty = function () {
   return !this.matrix.some((rows) => rows.some((cell) => cell.piece !== null));
+};
+
+function makeid(length) {
+  var result = '';
+  var characters = 'ABCDEFGHIJKLMNOPQRSTUVWXYZ0123456789';
+  var charactersLength = characters.length;
+  for (var i = 0; i < length; i++) {
+    result += characters.charAt(Math.floor(Math.random() * charactersLength));
+  }
+  return result;
+}
+
+BoardSchema.methods.generateBoardId = function () {
+  let code = makeid(6);
+  return Board.findOne({ game_code: code }).then((matchedBoard) => {
+    if (!matchedBoard) {
+      this.game_code = code;
+      return this;
+    }
+    return this.generateBoardId();
+  });
 };
 
 var Board = mongoose.model('Board', BoardSchema);
