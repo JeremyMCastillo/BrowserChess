@@ -16,9 +16,6 @@ describe('Board endpoint', () => {
         .end((err, res) => {
           res.should.have.status(200);
           should.not.exist(err);
-
-          console.log(res.body);
-
           done();
         });
     });

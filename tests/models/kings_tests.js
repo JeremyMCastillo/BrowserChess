@@ -1,7 +1,7 @@
 const { assert } = require('chai');
-const { PieceType, PieceColor } = require('../../models/pieces');
-const { King } = require('../../models/kings');
-const { Knight } = require('../../models/knights');
+const { PieceType, PieceColor } = require('../../models/pieces/pieces');
+const { King } = require('../../models/pieces/kings');
+const { Knight } = require('../../models/pieces/knights');
 const { TestHelpers } = require('../helpers');
 
 describe('Kings model', () => {

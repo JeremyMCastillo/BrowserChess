@@ -1,11 +1,11 @@
 const { assert } = require('chai');
-const { PieceColor } = require('../../models/pieces');
-const { Pawn } = require('../../models/pawns');
-const { Rook } = require('../../models/rooks');
-const { Bishop } = require('../../models/bishops');
-const { Knight } = require('../../models/knights');
-const { King } = require('../../models/kings');
-const { Queen } = require('../../models/queens');
+const { PieceColor } = require('../../models/pieces/pieces');
+const { Pawn } = require('../../models/pieces/pawns');
+const { Rook } = require('../../models/pieces/rooks');
+const { Bishop } = require('../../models/pieces/bishops');
+const { Knight } = require('../../models/pieces/knights');
+const { King } = require('../../models/pieces/kings');
+const { Queen } = require('../../models/pieces/queens');
 const { TestHelpers } = require('../helpers');
 
 /*

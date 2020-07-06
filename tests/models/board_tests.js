@@ -9,6 +9,16 @@ describe('Boards model', () => {
       assert.isNotNull(board);
     });
 
+    it('should initialze a board with an empty matrix, with x and y in the right order', () => {
+      let board = new Board();
+      board.initializeEmptyBoard();
+
+      assert.equal(board.matrix.length, 8);
+      assert.equal(board.matrix[0].length, 8);
+      assert.equal(board.matrix[2][3].x, 2);
+      assert.equal(board.matrix[2][3].y, 3);
+    });
+
     it('should save a new board to the database', (done) => {
       let board = new Board();
       let player = new Player('test');
