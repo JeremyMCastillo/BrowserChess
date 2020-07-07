@@ -5,9 +5,9 @@ export const createNewGame = () => {};
 
 export const joinGame = () => {};
 
-export const onUsernameUpdate = (value) => {
+export const onRegisterFieldUpdate = ({ prop, value }) => {
   return {
     type: USERNAME_UPDATE,
-    payload: { value }
+    payload: { prop, value },
   };
 };

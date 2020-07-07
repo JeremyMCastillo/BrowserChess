@@ -12,7 +12,7 @@ class Landing extends Component {
     this.state = {
       loading: false,
       isNewGameFormShown: false,
-      isJoinGameFormShown: false
+      isJoinGameFormShown: false,
     };
 
     this.onNewGamePress = this.onNewGamePress.bind(this);
@@ -23,7 +23,7 @@ class Landing extends Component {
     this.setState({
       ...this.state,
       isJoinGameFormShown: false,
-      isNewGameFormShown: !this.state.isNewGameFormShown
+      isNewGameFormShown: !this.state.isNewGameFormShown,
     });
   }
 
@@ -31,7 +31,7 @@ class Landing extends Component {
     this.setState({
       ...this.state,
       isNewGameFormShown: false,
-      isJoinGameFormShown: !this.state.isJoinGameFormShown
+      isJoinGameFormShown: !this.state.isJoinGameFormShown,
     });
   }
 
@@ -44,6 +44,12 @@ class Landing extends Component {
   renderJoinGameForm() {
     if (this.state.isJoinGameFormShown) {
       return <PlayerJoin />;
+    }
+  }
+
+  renderSubmitButton() {
+    if (this.state.isNewGameFormShown || this.state.isJoinGameFormShown) {
+      return <Button>Submit</Button>;
     }
   }
 
@@ -75,6 +81,7 @@ class Landing extends Component {
         </div>
         {this.renderNewGameForm()}
         {this.renderJoinGameForm()}
+        {this.renderSubmitButton()}
       </div>
     );
   }
