@@ -1,8 +1,9 @@
 const _ = require('lodash');
-const Player = require('../models/players');
+const { Board } = require('../models/board');
+const { Player } = require('../models/players');
 
 var route = (app) => {
-  app.post('/grids/createNew', (req, res) => {
+  app.post('/board/new-game', (req, res) => {
     var body = _.pick(req.body, ['username']);
     var { username } = body;
 
@@ -12,19 +13,19 @@ var route = (app) => {
     // when creating a new grid, the first player slot is filled.
     // After filling the player slot, we create a unique grid ID code that
     // the player can give to another player to join the game.
-    var grid = { player };
-    grid
-      .save()
-      .then(() => grid.generateGridId())
-      .then((newGrid) => {
-        res.send({ newGrid });
+    var board = new Board({ player_1: player });
+    board
+      .generateBoardId()
+      .then(() => board.save())
+      .then(() => {
+        res.send({ board });
       })
       .catch((e) => {
         res.status(500).send(e);
       });
   });
 
-  app.post('/grids/join', (req, res) => {
+  app.post('/board/join-game', (req, res) => {
     // TODO: Take a grid ID and username and fill in the second player slot. Return the grids info
     // once the player slot is saved.
     var body = _.pick(req.body, ['gridId', 'username']);

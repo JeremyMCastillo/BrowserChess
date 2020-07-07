@@ -7,7 +7,7 @@
     "start": "node index.js",
     "start-watch": "nodemon index.js",
     "dev": "concurrently \"yarn run start-watch\" \"cd client && yarn start\"",
-    "test": "nodemon --exec \\\"mocha tests/ --recursive --timeout=3000 -R min\\\""
+    "test": "nodemon --exec \\\"mocha tests/ --recursive --timeout=3000\\\""
   },
   "repository": {
     "type": "git",
@@ -40,7 +40,7 @@
     "chai": "^4.2.0",
     "chai-http": "^4.3.0",
     "concurrently": "^5.2.0",
-    "eslint": "^7.2.0",
+    "eslint": "^6.6.0",
     "eslint-config-airbnb-base": "^14.1.0",
     "eslint-plugin-import": "^2.21.1",
     "mocha": "^7.2.0",
