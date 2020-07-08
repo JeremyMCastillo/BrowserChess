@@ -1,6 +1,7 @@
 import React from 'react';
 import { Typography, ButtonGroup, Button } from '@material-ui/core';
 import knightLogo from '../images/knight black.svg';
+import Board from './Board';
 
 function Landing() {
   return (
@@ -18,6 +19,7 @@ function Landing() {
           <Button variant='contained' class='button'>
             Join Game
           </Button>
+          <Board />
         </div>
       </div>
     </div>
