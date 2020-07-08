@@ -1,5 +1,10 @@
 import React from 'react';
 import ReactDOM from 'react-dom';
+import { createStore, applyMiddleware } from 'redux';
+import { Provider } from 'react-redux';
+import ReduxThunk from 'redux-thunk';
+import ReduxLogger from 'redux-logger';
+import reducers from './reducers';
 import './index.css';
 import App from './App';
 import * as serviceWorker from './serviceWorker';
@@ -16,8 +21,16 @@ class Doc extends React.Component {
 
 ReactDOM.render(
   <React.StrictMode>
-    <Doc />
-    <App />
+    <Provider
+      store={createStore(
+        reducers,
+        {},
+        applyMiddleware(ReduxThunk, ReduxLogger)
+      )}
+    >
+      <Doc />
+      <App />
+    </Provider>
   </React.StrictMode>,
   document.getElementById('root')
 );

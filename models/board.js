@@ -43,20 +43,24 @@ var BoardSchema = new mongoose.Schema({
   matrix: [[Object]]
 });
 
-BoardSchema.pre('save', () => {
-  if (this.matrix === null) {
+BoardSchema.pre('save', function (next) {
+  if (
+    !this.matrix ||
+    typeof this.matrix === typeof undefined ||
+    this.matrix === null ||
+    this.matrix.length === 0
+  ) {
     this.initializeEmptyBoard();
+    console.log(this.matrix);
     this.populate();
   }
+
+  next();
 });
 
 BoardSchema.methods.initializeEmptyBoard = function () {
-  this.matrix = _.range(8).map((x) => _.range(8).map((y) => new Cell(x, y)));
-};
-
-BoardSchema.methods.init = function () {
   // Initialize the 2D matrix with the player assigned to their beginning side
-  return null;
+  this.matrix = _.range(8).map((x) => _.range(8).map((y) => new Cell(x, y)));
 };
 
 BoardSchema.methods.populate = function () {

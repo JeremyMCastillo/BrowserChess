@@ -11,7 +11,7 @@ describe('Boards model', () => {
 
     it('should initialze a board with an empty matrix, with x and y in the right order', () => {
       let board = new Board();
-      board.initializeEmptyBoard();
+      board.init();
 
       assert.equal(board.matrix.length, 8);
       assert.equal(board.matrix[0].length, 8);
