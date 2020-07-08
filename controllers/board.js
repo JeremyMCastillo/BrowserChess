@@ -21,6 +21,7 @@ var route = (app) => {
         res.send({ board });
       })
       .catch((e) => {
+        console.log(e);
         res.status(500).send(e);
       });
   });
@@ -28,13 +29,31 @@ var route = (app) => {
   app.post('/board/join-game', (req, res) => {
     // TODO: Take a grid ID and username and fill in the second player slot. Return the grids info
     // once the player slot is saved.
-    var body = _.pick(req.body, ['gridId', 'username']);
-    var { gridId, username } = body;
+    var body = _.pick(req.body, ['gameCode', 'username']);
+    var { gameCode, username } = body;
 
     // Create new player, update grid and return grid info.
-    var grid = {};
-
-    res.send({});
+    var player = new Player({ username });
+    Board.findOne({ game_code: gameCode })
+      .then((gameToJoin) => {
+        if (!gameToJoin) {
+          res.sendStatus(404);
+        } else {
+          gameToJoin.player_2 = player;
+          gameToJoin
+            .save()
+            .then(() => {
+              res.send({ board: gameToJoin });
+            })
+            .catch((error) => {
+              res.status(500).send({ error });
+            });
+        }
+      })
+      .catch((error) => {
+        console.log(error);
+        res.sendStatus(500);
+      });
   });
 };
 
