@@ -2,7 +2,7 @@ import React from 'react';
 import { BrowserRouter as Router, Switch, Route, Link } from 'react-router-dom';
 import { PrivateRoute } from "./utils/PrivateRoute";
 import logo from './logo.svg';
-import { Game } from './components/Game'
+import Game  from './components/Game'
 import './App.css';
 import 'bulma/css/bulma.css';
 

@@ -81,7 +81,6 @@ class Landing extends Component {
           >
             Submit
           </Button>
-          <Board />
         </div>
       );
     }
