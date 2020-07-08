@@ -1,6 +1,8 @@
 import React from 'react';
 import { BrowserRouter as Router, Switch, Route, Link } from 'react-router-dom';
+import { PrivateRoute } from "./components/PrivateRoute";
 import logo from './logo.svg';
+import { Game } from './components/Game'
 import './App.css';
 import 'bulma/css/bulma.css';
 
@@ -21,6 +23,7 @@ function App() {
         <Route path='/join-game'>
           <PlayerJoin />
         </Route>
+        <PrivateRoute exact path="/game" component={Game}/> {/* Need to make sure the endpoint is correct */}
       </Switch>
     </Router>
   );
