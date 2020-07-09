@@ -6,6 +6,8 @@ import knightLogo from '../images/knight black.svg';
 import PlayerStart from './PlayerStart';
 import PlayerJoin from './PlayerJoin';
 import { createNewGame, joinGame } from '../actions/LandingActions';
+import { Redirect } from 'react-router-dom';
+import openSocket from 'socket.io-client';
 
 class Landing extends Component {
   constructor(props, context) {
@@ -19,6 +21,12 @@ class Landing extends Component {
     this.onNewGamePress = this.onNewGamePress.bind(this);
     this.onJoinGamePress = this.onJoinGamePress.bind(this);
     this.onStartGame = this.onStartGame.bind(this);
+  }
+
+  componentDidUpdate() {
+    if (this.props.player_1 && !this.props.player_2) {
+      this.setState({ redirect: '/new-game-waiting-room' });
+    }
   }
 
   onNewGamePress() {
@@ -43,6 +51,8 @@ class Landing extends Component {
       this.props.createNewGame(this.props.username);
     } else if (this.state.isJoinGameFormShown) {
       this.props.joinGame(this.props.username, this.props.gameCode);
+      const socket = openSocket('/');
+      socket.emit('gameJoined');
     } else {
       this.setState({ ...this.state, loading: false });
     }
@@ -93,6 +103,10 @@ class Landing extends Component {
   }
 
   render() {
+    if (this.state.redirect) {
+      return <Redirect to={this.state.redirect} push />;
+    }
+
     return (
       <div>
         {this.renderErrorMessage()}
@@ -134,9 +148,17 @@ class Landing extends Component {
 }
 
 const mapStateToProps = (state) => {
-  let { username, gameCode, loading, error } = state.landing;
+  let {
+    username,
+    gameCode,
+    loading,
+    error,
+    board,
+    player_1,
+    player_2
+  } = state.landing;
 
-  return { username, gameCode, loading, error };
+  return { username, gameCode, loading, error, board, player_1, player_2 };
 };
 
 export default connect(mapStateToProps, {

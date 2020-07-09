@@ -51,7 +51,6 @@ BoardSchema.pre('save', function (next) {
     this.matrix.length === 0
   ) {
     this.initializeEmptyBoard();
-    console.log(this.matrix);
     this.populate();
   }
 

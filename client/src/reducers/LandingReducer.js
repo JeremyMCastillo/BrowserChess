@@ -6,8 +6,8 @@ import {
   JOIN_GAME
 } from '../actions/types';
 const INITIAL_STATE = {
-  showNewGameForm: false,
-  showJoinGameForm: false,
+  player_1: '',
+  player_2: '',
   username: '',
   gameCode: '',
   loading: false,
@@ -24,16 +24,17 @@ export default (state = INITIAL_STATE, action) => {
     case CREATE_NEW_GAME:
       return {
         ...state,
-        ...INITIAL_STATE,
         loading: false,
-        board: action.payload.board
+        board: action.payload.board,
+        player_1: action.payload.board.player_1[0].name.username
       };
     case JOIN_GAME:
       return {
         ...state,
-        ...INITIAL_STATE,
         loading: false,
-        board: action.payload.board
+        board: action.payload.board,
+        player_1: action.payload.board.player_1[0].name.username,
+        player_2: action.payload.board.player_2[0].name.username
       };
     case NETWORK_ERROR:
       return { ...state, loading: false, error: action.payload.error };
