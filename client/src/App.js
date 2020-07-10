@@ -14,8 +14,7 @@ function App() {
         <Route exact path='/'>
           <Landing />
         </Route>
-        <PrivateRoute exact path='/game/:gameCode' component={Game} />{' '}
-        {/* Need to make sure the endpoint is correct */}
+        <PrivateRoute path='/game' component={Game} />{' '}
       </Switch>
     </Router>
   );

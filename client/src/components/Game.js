@@ -1,13 +1,14 @@
 import React from 'react';
-import { useParams, useHistory } from 'react-router-dom';
+import { Route, useParams, useHistory, useRouteMatch } from 'react-router-dom';
 import { connect } from 'react-redux';
 import '../index.css';
 import Board from './Board';
-import Graveyard from './Graveyard';
+import { Graveyard } from './Graveyard';
 
 const Game = (props) => {
   let { gameCode } = useParams();
   let history = useHistory();
+  let match = useRouteMatch();
 
   console.log(gameCode);
 
@@ -16,9 +17,19 @@ const Game = (props) => {
   }
 
   return (
-    <div className='gameboard'>
-      <Board />
-    </div>
+    <Route path={`${match.path}/:gameCode`} className='gameboard'>
+      <div className='columns'>
+        <div className='column is-narrow'>
+          <Graveyard />
+        </div>
+        <div className='column'>
+          <Board />
+        </div>
+        <div className='column is-narrow'>
+          <Graveyard />
+        </div>
+      </div>
+    </Route>
   );
 };
 

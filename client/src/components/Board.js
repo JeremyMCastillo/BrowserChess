@@ -14,7 +14,8 @@ const Board = (props) => {
     );
   };
 
-  const board = [];
+  const { board } = props;
+  console.log(board);
   for (let i = 0; i < 8; i++) {
     const squareRows = [];
     for (let j = 0; j < 8; j++) {
@@ -34,4 +35,10 @@ function isEven(num) {
   return num % 2 == 0;
 }
 
-export default connect()(Board);
+const mapStateToProps = (state) => {
+  let { board } = state.landing;
+
+  return { board };
+};
+
+export default connect(mapStateToProps)(Board);
