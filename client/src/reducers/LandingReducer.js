@@ -34,7 +34,7 @@ export default (state = INITIAL_STATE, action) => {
         loading: false,
         board: action.payload.board,
         player_1: action.payload.board.player_1[0].name.username,
-        player_2: action.payload.board.player_2[0].name.username
+        player_2: action.payload.board.player_2[0] ? action.payload.board.player_2[0].name.username : ''
       };
     case NETWORK_ERROR:
       return { ...state, loading: false, error: action.payload.error };

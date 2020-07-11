@@ -29,14 +29,14 @@ fs.readdir(modelsDir, (err, files) => {
   const io = socketIo(http);
   io.on('connection', (socket) => {
     console.log('New client connected');
-    socket.on('gameJoined', () => {
-      // TODO: Need to take in game information on this socket and put the players in a room.
-      console.log('New player joined the game');
-      socket.emit('gameJoined', {});
+    socket.on('gameJoined', ({ gameCode }) => {
+      console.log(`New player joined the game with code ${gameCode}`);
+      socket.join(gameCode);
     });
 
     socket.on('disconnect', () => {
       console.log('Client disconnected');
+      socket.leaveAll();
     });
   });
 

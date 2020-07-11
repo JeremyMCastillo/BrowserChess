@@ -5,6 +5,7 @@ const { Player } = require('../models/players');
 var route = (app) => {
   app.get('/board/:gameCode', (req, res) => {
     var { gameCode } = req.params;
+    console.log(`Loading board with code ${gameCode}`);
 
     Board.findOne({ game_code: gameCode })
       .then((board) => {

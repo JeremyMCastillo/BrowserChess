@@ -1,8 +1,15 @@
-import React, { useState } from 'react';
+import React from 'react';
+import { useParams } from 'react-router-dom';
 import { connect } from 'react-redux';
 import Cell from './Cell';
+import { loadBoard } from '../actions/LandingActions';
 
 const Board = (props) => {
+  let { gameCode } = useParams();
+  if (!props.board.game_code && gameCode) {
+    props.loadBoard(gameCode);
+  }
+
   const renderSquare = (i, squareShade) => {
     return (
       <Cell
@@ -14,7 +21,7 @@ const Board = (props) => {
     );
   };
 
-  const { board } = props;
+  const board = [];
   console.log(board);
   for (let i = 0; i < 8; i++) {
     const squareRows = [];
@@ -41,4 +48,4 @@ const mapStateToProps = (state) => {
   return { board };
 };
 
-export default connect(mapStateToProps)(Board);
+export default connect(mapStateToProps, { loadBoard })(Board);

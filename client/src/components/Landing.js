@@ -44,8 +44,6 @@ const Landing = (props) => {
       props.createNewGame(props.username);
     } else if (state.isJoinGameFormShown) {
       props.joinGame(props.username, props.gameCode);
-      const socket = openSocket('/');
-      socket.emit('gameJoined');
     } else {
       setState({ ...state, loading: false });
     }

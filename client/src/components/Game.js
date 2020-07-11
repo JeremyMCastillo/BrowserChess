@@ -1,6 +1,7 @@
 import React from 'react';
-import { Route, useParams, useHistory, useRouteMatch } from 'react-router-dom';
+import { useParams, useHistory } from 'react-router-dom';
 import { connect } from 'react-redux';
+import openSocket from 'socket.io-client';
 import '../index.css';
 import Board from './Board';
 import { Graveyard } from './Graveyard';
@@ -8,7 +9,8 @@ import { Graveyard } from './Graveyard';
 const Game = (props) => {
   let { gameCode } = useParams();
   let history = useHistory();
-  let match = useRouteMatch();
+  const socket = openSocket('/');
+  socket.emit('gameJoined', { gameCode });
 
   console.log(gameCode);
 
@@ -17,19 +19,17 @@ const Game = (props) => {
   }
 
   return (
-    <Route path={`${match.path}/:gameCode`} className='gameboard'>
-      <div className='columns'>
-        <div className='column is-narrow'>
-          <Graveyard />
-        </div>
-        <div className='column'>
-          <Board />
-        </div>
-        <div className='column is-narrow'>
-          <Graveyard />
-        </div>
+    <div className='columns'>
+      <div className='column is-narrow'>
+        <Graveyard />
       </div>
-    </Route>
+      <div className='column'>
+        <Board />
+      </div>
+      <div className='column is-narrow'>
+        <Graveyard />
+      </div>
+    </div>
   );
 };
 

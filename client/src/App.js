@@ -14,7 +14,7 @@ function App() {
         <Route exact path='/'>
           <Landing />
         </Route>
-        <PrivateRoute path='/game' component={Game} />{' '}
+        <PrivateRoute path='/game/:gameCode' component={Game} />{' '}
       </Switch>
     </Router>
   );
