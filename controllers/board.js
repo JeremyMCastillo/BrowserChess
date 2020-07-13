@@ -3,6 +3,23 @@ const { Board } = require('../models/board');
 const { Player } = require('../models/players');
 
 var route = (app) => {
+  app.get('/board/:gameCode', (req, res) => {
+    var { gameCode } = req.params;
+    console.log(`Loading board with code ${gameCode}`);
+
+    Board.findOne({ game_code: gameCode })
+      .then((board) => {
+        if (!board) {
+          res.status(404).send({ error: 'Invalid game code.' });
+        } else {
+          res.send({ board });
+        }
+      })
+      .catch((error) => {
+        res.status(500).send({ error });
+      });
+  });
+
   app.post('/board/new-game', (req, res) => {
     var body = _.pick(req.body, ['username']);
     var { username } = body;

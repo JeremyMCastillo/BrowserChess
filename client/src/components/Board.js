@@ -1,36 +1,39 @@
-import React, { useState } from "react";
-import Cell from "./Cell";
+import React from 'react';
+import { useParams } from 'react-router-dom';
+import { connect } from 'react-redux';
+import Cell from './Cell';
+import { loadBoard } from '../actions/LandingActions';
 
-export default class Board extends React.Component {
-
-  renderSquare(i, squareShade) {
-    return <Cell 
-    piece = {this.props.squares[i]} 
-    style = {this.props.squares[i]? this.props.squares[i].style : null}
-    shade = {squareShade}
-    onClick={() => this.props.onClick(i)}
-    />
+const Board = (props) => {
+  let { gameCode } = useParams();
+  if (!props.board.matrix && gameCode) {
+    props.loadBoard(gameCode);
   }
 
-  render() {
-    const board = [];
-    for(let i = 0; i < 8; i++){
-      const squareRows = [];
-      for(let j = 0; j < 8; j++){
-        const squareShade = (isEven(i) && isEven(j)) || (!isEven(i) && !isEven(j))? "light-square" : "dark-square";
-        squareRows.push(this.renderSquare((i*8) + j, squareShade));
+  const renderCell = (cell) => {
+    return <Cell piece={cell.piece} onClick={() => props.onClick()} />;
+  };
+
+  const board = [];
+  if (props.board.matrix) {
+    for (let y = 7; y >= 0; y--) {
+      let row = [];
+      for (let x = 0; x < 8; x++) {
+        console.log('MATRIX');
+        console.log(props.board.matrix[x][y]);
+        row.push(renderCell(props.board.matrix[x][y]));
       }
-      board.push(<div className="board-row">{squareRows}</div>)
+      board.push(<div className='columns'>{row}</div>);
     }
-
-    return (
-      <div>
-        {board}
-      </div>
-    );
   }
-}
 
-function isEven(num){
-  return num % 2 == 0
-}
+  return <div>{board}</div>;
+};
+
+const mapStateToProps = (state) => {
+  let { board } = state.landing;
+
+  return { board };
+};
+
+export default connect(mapStateToProps, { loadBoard })(Board);

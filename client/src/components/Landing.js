@@ -1,4 +1,4 @@
-import React, { Component } from 'react';
+import React, { useState } from 'react';
 import { connect } from 'react-redux';
 import { Typography, Button } from '@material-ui/core';
 import { Alert } from '@material-ui/lab';
@@ -6,137 +6,144 @@ import knightLogo from '../images/knight black.svg';
 import PlayerStart from './PlayerStart';
 import PlayerJoin from './PlayerJoin';
 import { createNewGame, joinGame } from '../actions/LandingActions';
+import { useHistory } from 'react-router-dom';
+import openSocket from 'socket.io-client';
 
-class Landing extends Component {
-  constructor(props, context) {
-    super(props, context);
+const Landing = (props) => {
+  const [state, setState] = useState({
+    isNewGameFormShown: false,
+    isJoinGameFormShown: false
+  });
 
-    this.state = {
-      isNewGameFormShown: false,
-      isJoinGameFormShown: false
-    };
+  let history = useHistory();
 
-    this.onNewGamePress = this.onNewGamePress.bind(this);
-    this.onJoinGamePress = this.onJoinGamePress.bind(this);
-    this.onStartGame = this.onStartGame.bind(this);
+  if (props.player_1 && !props.player_2) {
+    localStorage.setItem('gameCode', props.board.game_code);
+    history.push(`/game/${props.board.game_code}`);
   }
 
-  onNewGamePress() {
-    this.setState({
-      ...this.state,
+  const onNewGamePress = () => {
+    setState({
+      ...state,
       isJoinGameFormShown: false,
-      isNewGameFormShown: !this.state.isNewGameFormShown
+      isNewGameFormShown: !state.isNewGameFormShown
     });
-  }
+  };
 
-  onJoinGamePress() {
-    this.setState({
-      ...this.state,
+  const onJoinGamePress = () => {
+    setState({
+      ...state,
       isNewGameFormShown: false,
-      isJoinGameFormShown: !this.state.isJoinGameFormShown
+      isJoinGameFormShown: !state.isJoinGameFormShown
     });
-  }
+  };
 
-  onStartGame() {
-    this.setState({ ...this.state, loading: true });
-    if (this.state.isNewGameFormShown) {
-      this.props.createNewGame(this.props.username);
-    } else if (this.state.isJoinGameFormShown) {
-      this.props.joinGame(this.props.username, this.props.gameCode);
+  const onStartGame = () => {
+    setState({ ...state, loading: true });
+    if (state.isNewGameFormShown) {
+      props.createNewGame(props.username);
+    } else if (state.isJoinGameFormShown) {
+      props.joinGame(props.username, props.gameCode);
     } else {
-      this.setState({ ...this.state, loading: false });
+      setState({ ...state, loading: false });
     }
-  }
+  };
 
-  renderNewGameForm() {
-    if (this.state.isNewGameFormShown) {
+  const renderNewGameForm = () => {
+    if (state.isNewGameFormShown) {
       return (
         <div className='columns'>
           <PlayerStart className='columns' />
         </div>
       );
     }
-  }
+  };
 
-  renderJoinGameForm() {
-    if (this.state.isJoinGameFormShown) {
+  const renderJoinGameForm = () => {
+    if (state.isJoinGameFormShown) {
       return (
         <div className='columns'>
           <PlayerJoin />
         </div>
       );
     }
-  }
+  };
 
-  renderSubmitButton() {
-    if (this.state.isNewGameFormShown || this.state.isJoinGameFormShown) {
+  const renderSubmitButton = () => {
+    if (state.isNewGameFormShown || state.isJoinGameFormShown) {
       return (
         <div className='columns mt-1'>
           <Button
-            disabled={this.props.loading}
+            disabled={props.loading}
             className='column'
             variant='outlined'
             color='primary'
-            onClick={this.onStartGame}
+            onClick={onStartGame}
           >
             Submit
           </Button>
         </div>
       );
     }
-  }
+  };
 
-  renderErrorMessage() {
-    if (this.props.error) {
-      return <Alert severity='error'>{this.props.error}</Alert>;
+  const renderErrorMessage = () => {
+    if (props.error) {
+      return <Alert severity='error'>{props.error}</Alert>;
     }
-  }
+  };
 
-  render() {
-    return (
-      <div>
-        {this.renderErrorMessage()}
-        <div className='App-header'>
-          <Typography component='h1'>
-            Browser Chess <img className='piece' src={knightLogo} />
-          </Typography>
-          <div className='columns'>
-            <div className='column'>
-              <Button
-                onClick={this.onNewGamePress}
-                variant='contained'
-                color='primary'
-                className='button'
-                disabled={this.props.loading}
-              >
-                Create New Game
-              </Button>
-            </div>
-            <div className='column'>
-              <Button
-                onClick={this.onJoinGamePress}
-                variant='contained'
-                color='primary'
-                className='button'
-                disabled={this.props.loading}
-              >
-                Join Game
-              </Button>
-            </div>
+  return (
+    <div>
+      {renderErrorMessage()}
+      <div className='App-header'>
+        <Typography component='h1'>
+          Browser Chess <img className='piece' src={knightLogo} />
+        </Typography>
+        <div className='columns'>
+          <div className='column'>
+            <Button
+              onClick={onNewGamePress}
+              variant='contained'
+              color='primary'
+              className='button'
+              disabled={props.loading}
+            >
+              Create New Game
+            </Button>
           </div>
-          {this.renderNewGameForm()}
-          {this.renderJoinGameForm()}
-          {this.renderSubmitButton()}
+          <div className='column'>
+            <Button
+              onClick={onJoinGamePress}
+              variant='contained'
+              color='primary'
+              className='button'
+              disabled={props.loading}
+            >
+              Join Game
+            </Button>
+          </div>
         </div>
+        {renderNewGameForm()}
+        {renderJoinGameForm()}
+        {renderSubmitButton()}
       </div>
-    );
-  }
-}
+    </div>
+  );
+};
 
 const mapStateToProps = (state) => {
-  let { username, gameCode, loading, error } = state.landing;
+  let {
+    username,
+    gameCode,
+    loading,
+    error,
+    board,
+    player_1,
+    player_2
+  } = state.landing;
 
-  return { username, gameCode, loading, error };
+  return { username, gameCode, loading, error, board, player_1, player_2 };
 };
 
 export default connect(mapStateToProps, {

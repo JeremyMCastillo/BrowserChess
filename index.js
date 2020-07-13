@@ -1,6 +1,7 @@
 var express = require('express');
 var bodyParser = require('body-parser');
 var fs = require('fs');
+var socketIo = require('socket.io');
 
 // Construct a config object based on json formatted settings.
 const contents = fs.readFileSync(require.resolve('./config.json'));
@@ -23,6 +24,20 @@ fs.readdir(modelsDir, (err, files) => {
   files.forEach((file) => {
     // eslint-disable-next-line import/no-dynamic-require
     require(`${modelsDir}${file}`).route(app, config);
+  });
+
+  const io = socketIo(http);
+  io.on('connection', (socket) => {
+    console.log('New client connected');
+    socket.on('gameJoined', ({ gameCode }) => {
+      console.log(`New player joined the game with code ${gameCode}`);
+      socket.join(gameCode);
+    });
+
+    socket.on('disconnect', () => {
+      console.log('Client disconnected');
+      socket.leaveAll();
+    });
   });
 
   http.listen(3030, () => {

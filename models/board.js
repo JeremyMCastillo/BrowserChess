@@ -51,7 +51,6 @@ BoardSchema.pre('save', function (next) {
     this.matrix.length === 0
   ) {
     this.initializeEmptyBoard();
-    console.log(this.matrix);
     this.populate();
   }
 
@@ -84,22 +83,22 @@ BoardSchema.methods.populate = function () {
   this.setPiece(new Queen(PieceColor.white, 3, 0));
   this.setPiece(new King(PieceColor.white, 4, 0));
 
-  this.setPiece(new Pawn(PieceColor.black, 0, 7));
-  this.setPiece(new Pawn(PieceColor.black, 1, 7));
-  this.setPiece(new Pawn(PieceColor.black, 2, 7));
-  this.setPiece(new Pawn(PieceColor.black, 3, 7));
-  this.setPiece(new Pawn(PieceColor.black, 4, 7));
-  this.setPiece(new Pawn(PieceColor.black, 5, 7));
-  this.setPiece(new Pawn(PieceColor.black, 6, 7));
-  this.setPiece(new Pawn(PieceColor.black, 7, 7));
-  this.setPiece(new Rook(PieceColor.black, 0, 1));
-  this.setPiece(new Rook(PieceColor.black, 7, 1));
-  this.setPiece(new Knight(PieceColor.black, 1, 1));
-  this.setPiece(new Knight(PieceColor.black, 6, 1));
-  this.setPiece(new Bishop(PieceColor.black, 2, 1));
-  this.setPiece(new Bishop(PieceColor.black, 5, 1));
-  this.setPiece(new Queen(PieceColor.black, 3, 1));
-  this.setPiece(new King(PieceColor.black, 4, 1));
+  this.setPiece(new Pawn(PieceColor.black, 0, 6));
+  this.setPiece(new Pawn(PieceColor.black, 1, 6));
+  this.setPiece(new Pawn(PieceColor.black, 2, 6));
+  this.setPiece(new Pawn(PieceColor.black, 3, 6));
+  this.setPiece(new Pawn(PieceColor.black, 4, 6));
+  this.setPiece(new Pawn(PieceColor.black, 5, 6));
+  this.setPiece(new Pawn(PieceColor.black, 6, 6));
+  this.setPiece(new Pawn(PieceColor.black, 7, 6));
+  this.setPiece(new Rook(PieceColor.black, 0, 7));
+  this.setPiece(new Rook(PieceColor.black, 7, 7));
+  this.setPiece(new Knight(PieceColor.black, 1, 7));
+  this.setPiece(new Knight(PieceColor.black, 6, 7));
+  this.setPiece(new Bishop(PieceColor.black, 2, 7));
+  this.setPiece(new Bishop(PieceColor.black, 5, 7));
+  this.setPiece(new Queen(PieceColor.black, 3, 7));
+  this.setPiece(new King(PieceColor.black, 4, 7));
 };
 
 BoardSchema.methods.toJson = function () {

@@ -67,6 +67,27 @@ export const joinGame = (username, gameCode) => {
   };
 };
 
+export const loadBoard = (gameCode) => {
+  return (dispatch) => {
+    axios.get(`/board/${gameCode}`)
+      .then((response) => {
+        let { board } = response.data;
+        dispatch({
+          type: JOIN_GAME,
+          payload: { board }
+        });
+      })
+      .catch((error) => {
+        dispatch({
+          type: NETWORK_ERROR,
+          payload: {
+            error: error.message
+          }
+        });
+      });
+  };
+};
+
 export const onRegisterFieldUpdate = ({ prop, value }) => {
   return {
     type: LANDING_FORM_UPDATE,
