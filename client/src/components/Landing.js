@@ -12,7 +12,7 @@ import openSocket from 'socket.io-client';
 const Landing = (props) => {
   const [state, setState] = useState({
     isNewGameFormShown: false,
-    isJoinGameFormShown: false,
+    isJoinGameFormShown: false
   });
 
   let history = useHistory();
@@ -26,7 +26,7 @@ const Landing = (props) => {
     setState({
       ...state,
       isJoinGameFormShown: false,
-      isNewGameFormShown: !state.isNewGameFormShown,
+      isNewGameFormShown: !state.isNewGameFormShown
     });
   };
 
@@ -34,7 +34,7 @@ const Landing = (props) => {
     setState({
       ...state,
       isNewGameFormShown: false,
-      isJoinGameFormShown: !state.isJoinGameFormShown,
+      isJoinGameFormShown: !state.isJoinGameFormShown
     });
   };
 
@@ -140,7 +140,7 @@ const mapStateToProps = (state) => {
     error,
     board,
     player_1,
-    player_2,
+    player_2
   } = state.landing;
 
   return { username, gameCode, loading, error, board, player_1, player_2 };
@@ -148,5 +148,5 @@ const mapStateToProps = (state) => {
 
 export default connect(mapStateToProps, {
   createNewGame,
-  joinGame,
+  joinGame
 })(Landing);
