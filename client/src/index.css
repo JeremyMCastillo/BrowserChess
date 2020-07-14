@@ -11,3 +11,28 @@ code {
   font-family: source-code-pro, Menlo, Monaco, Consolas, 'Courier New',
     monospace;
 }
+
+#board {
+  width: 500px;
+  height: 435px;
+  margin: 35px auto;
+  border: 15px solid black;
+  padding:15px;
+
+}
+
+.columns:nth-child(even) 
+.square.column:nth-child(even) {
+  background: grey;
+}
+
+.columns:nth-child(odd) 
+.square.column:nth-child(odd) {
+  background: grey;
+}
+
+.column {
+  width: 50px;
+  height: 50px;
+  border: none;
+}

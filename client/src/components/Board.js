@@ -3,6 +3,7 @@ import { useParams } from 'react-router-dom';
 import { connect } from 'react-redux';
 import Cell from './Cell';
 import { loadBoard } from '../actions/LandingActions';
+import '../index.css';
 
 const Board = (props) => {
   let { gameCode } = useParams();
@@ -23,11 +24,11 @@ const Board = (props) => {
         console.log(props.board.matrix[x][y]);
         row.push(renderCell(props.board.matrix[x][y]));
       }
-      board.push(<div className='columns'>{row}</div>);
+      board.push(<div className='columns is-mobile'>{row}</div>);
     }
   }
 
-  return <div>{board}</div>;
+  return <div id="board">{board}</div>;
 };
 
 const mapStateToProps = (state) => {
