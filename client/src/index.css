@@ -21,17 +21,17 @@ code {
 
 }
 
-.columns:nth-child(even) 
+#board .columns:nth-child(even) 
 .square.column:nth-child(even) {
   background: grey;
 }
 
-.columns:nth-child(odd) 
+#board .columns:nth-child(odd) 
 .square.column:nth-child(odd) {
   background: grey;
 }
 
-.column {
+#board .column {
   width: 50px;
   height: 50px;
   border: none;
