@@ -23,12 +23,12 @@ code {
 
 #board .columns:nth-child(even) 
 .square.column:nth-child(even) {
-  background: grey;
+  background: forestgreen;
 }
 
 #board .columns:nth-child(odd) 
 .square.column:nth-child(odd) {
-  background: grey;
+  background: forestgreen;
 }
 
 #board .column {
