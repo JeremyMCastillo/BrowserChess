@@ -28,7 +28,7 @@ const Board = (props) => {
     }
   }
 
-  return <div id="board">{board}</div>;
+  return <div id="board" class="mt-6">{board}</div>;
 };
 
 const mapStateToProps = (state) => {

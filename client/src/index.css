@@ -13,8 +13,8 @@ code {
 }
 
 #board {
-  width: 500px;
-  height: 435px;
+  width: 550px;
+  height: 575px;
   margin: 35px auto;
   border: 15px solid black;
   padding:15px;
@@ -32,7 +32,7 @@ code {
 }
 
 #board .column {
-  width: 50px;
-  height: 50px;
+  width: 67.5px;
+  height: 67.5px;
   border: none;
 }
