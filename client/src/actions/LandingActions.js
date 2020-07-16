@@ -19,10 +19,10 @@ export const createNewGame = (username) => {
       .post('/board/new-game', body)
       .then((response) => {
         console.log(response);
-        let { board } = response.data;
+        let { board, player } = response.data;
         dispatch({
           type: CREATE_NEW_GAME,
-          payload: { board }
+          payload: { board, player }
         });
       })
       .catch((err) => {
@@ -46,10 +46,10 @@ export const joinGame = (username, gameCode) => {
       .post('/board/join-game', body)
       .then((response) => {
         console.log(response);
-        let { board } = response.data;
+        let { board, player } = response.data;
         dispatch({
           type: JOIN_GAME,
-          payload: { board }
+          payload: { board, player }
         });
       })
       .catch((err) => {
@@ -67,14 +67,15 @@ export const joinGame = (username, gameCode) => {
   };
 };
 
-export const loadBoard = (gameCode) => {
+export const loadBoard = (gameCode, username) => {
   return (dispatch) => {
-    axios.get(`/board/${gameCode}`)
+    axios
+      .get(`/board/${gameCode}/${username}`)
       .then((response) => {
-        let { board } = response.data;
+        let { board, player } = response.data;
         dispatch({
           type: JOIN_GAME,
-          payload: { board }
+          payload: { board, player }
         });
       })
       .catch((error) => {

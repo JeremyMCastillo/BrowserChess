@@ -1,37 +1,33 @@
 import React, { useState } from 'react';
 import '../index.css';
 
-
 export default function Square(props) {
-
-
   let pieceClass = props.piece ? props.piece.color : '';
-  let pieceType = props.piece ? props.piece.type: '';
+  let pieceType = props.piece ? props.piece.type : '';
+  let { x, y } = props.coordinates;
 
   const [selectedPiece, setSelectedPiece] = useState({
     pieceClass,
     pieceType,
+    x,
+    y
   });
 
-
-  const selectPiece = e => {
+  const selectPiece = (e) => {
     e.preventDefault();
     setSelectedPiece({
       ...selectedPiece,
       pieceClass,
       pieceType,
+      x,
+      y
     });
-    console.log(selectedPiece)
+    console.log(selectedPiece);
   };
 
   return (
-    <button className={`square piece column`} 
-    onClick={selectPiece}>
-      {
-      props.piece 
-      ? props.piece.type 
-      : null}
+    <button className={`square piece column`} onClick={selectPiece}>
+      {props.piece ? props.piece.type : null}
     </button>
   );
-};
-
+}

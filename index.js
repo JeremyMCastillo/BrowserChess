@@ -31,11 +31,13 @@ fs.readdir(modelsDir, (err, files) => {
     console.log('New client connected');
     socket.on('gameJoined', ({ gameCode }) => {
       console.log(`New player joined the game with code ${gameCode}`);
+      socket.to(gameCode).emit('gameJoined');
       socket.join(gameCode);
     });
 
     socket.on('disconnect', () => {
-      console.log('Client disconnected');
+      console.log(`Client disconnected from game: ${socket.rooms[0]}`);
+      socket.to(socket.rooms[0]).emit('gameDisconnected');
       socket.leaveAll();
     });
   });

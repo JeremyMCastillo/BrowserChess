@@ -1,10 +1,11 @@
 const _ = require('lodash');
 const { Board } = require('../models/board');
 const { Player } = require('../models/players');
+const { PieceColor } = require('../models/pieces');
 
 var route = (app) => {
-  app.get('/board/:gameCode', (req, res) => {
-    var { gameCode } = req.params;
+  app.get('/board/:gameCode/:username', (req, res) => {
+    var { gameCode, username } = req.params;
     console.log(`Loading board with code ${gameCode}`);
 
     Board.findOne({ game_code: gameCode })
@@ -12,7 +13,11 @@ var route = (app) => {
         if (!board) {
           res.status(404).send({ error: 'Invalid game code.' });
         } else {
-          res.send({ board });
+          let player =
+            board.player_1.getName() === username
+              ? board.player_1
+              : board.player_2;
+          res.send({ board, player });
         }
       })
       .catch((error) => {
@@ -24,7 +29,7 @@ var route = (app) => {
     var body = _.pick(req.body, ['username']);
     var { username } = body;
 
-    var player = new Player({ username });
+    var player = new Player(username, Player.getRandomColor());
 
     // TODO: Implement Grid model. Grid should have two player parameters
     // when creating a new grid, the first player slot is filled.
@@ -35,7 +40,7 @@ var route = (app) => {
       .generateBoardId()
       .then(() => board.save())
       .then(() => {
-        res.send({ board });
+        res.send({ board, player });
       })
       .catch((e) => {
         console.log(e);
@@ -50,17 +55,21 @@ var route = (app) => {
     var { gameCode, username } = body;
 
     // Create new player, update grid and return grid info.
-    var player = new Player({ username });
     Board.findOne({ game_code: gameCode })
       .then((gameToJoin) => {
         if (!gameToJoin) {
           res.sendStatus(404);
         } else {
+          let color =
+            gameToJoin.player_1.color === PieceColor.white
+              ? PieceColor.black
+              : PieceColor.white;
+          var player = new Player(username, color);
           gameToJoin.player_2 = player;
           gameToJoin
             .save()
             .then(() => {
-              res.send({ board: gameToJoin });
+              res.send({ board: gameToJoin, player });
             })
             .catch((error) => {
               res.status(500).send({ error });

@@ -12,7 +12,8 @@ const INITIAL_STATE = {
   gameCode: '',
   loading: false,
   error: '',
-  board: {}
+  board: {},
+  player: {}
 };
 
 export default (state = INITIAL_STATE, action) => {
@@ -26,15 +27,19 @@ export default (state = INITIAL_STATE, action) => {
         ...state,
         loading: false,
         board: action.payload.board,
-        player_1: action.payload.board.player_1[0].name.username
+        player_1: action.payload.board.player_1.name,
+        player: action.payload.player
       };
     case JOIN_GAME:
       return {
         ...state,
         loading: false,
         board: action.payload.board,
-        player_1: action.payload.board.player_1[0].name.username,
-        player_2: action.payload.board.player_2[0] ? action.payload.board.player_2[0].name.username : ''
+        player_1: action.payload.board.player_1.name,
+        player_2: action.payload.board.player_2
+          ? action.payload.board.player_2.name
+          : '',
+        player: action.payload.player
       };
     case NETWORK_ERROR:
       return { ...state, loading: false, error: action.payload.error };

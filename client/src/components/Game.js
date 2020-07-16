@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import { useParams, useHistory } from 'react-router-dom';
 import { Alert } from '@material-ui/lab';
 import { connect } from 'react-redux';
@@ -12,12 +12,19 @@ const Game = (props) => {
   let [status, setStatus] = useState('Joining the game.');
   let { gameCode } = useParams();
   let history = useHistory();
-  const socket = openSocket('/');
-  socket.emit('gameJoined', { gameCode });
-  socket.on('gameJoined', () => {
-    setStatus('Player joined the game');
-    props.loadBoard();
-  });
+
+  useEffect(() => {
+    const socket = openSocket('/');
+    socket.emit('gameJoined', { gameCode });
+    socket.on('gameJoined', () => {
+      setStatus('Player joined the game');
+      props.loadBoard();
+    });
+    socket.on('gameDisconnected', () => {
+      setStatus('Player left the game');
+      props.loadBoard();
+    });
+  }, []);
 
   console.log(gameCode);
 
@@ -55,4 +62,6 @@ const mapStateToProps = (state) => {
   return { board };
 };
 
-export default connect(mapStateToProps)(Game);
+export default connect(mapStateToProps, {
+  loadBoard
+})(Game);

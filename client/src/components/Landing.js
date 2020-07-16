@@ -17,7 +17,7 @@ const Landing = (props) => {
 
   let history = useHistory();
 
-  if (props.player_1 && !props.player_2) {
+  if (props.board.game_code) {
     localStorage.setItem('gameCode', props.board.game_code);
     history.push(`/game/${props.board.game_code}`);
   }
