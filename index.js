@@ -2,6 +2,7 @@ var express = require('express');
 var bodyParser = require('body-parser');
 var fs = require('fs');
 var socketIo = require('socket.io');
+// var { Board } = require('./models/board');
 
 // Construct a config object based on json formatted settings.
 const contents = fs.readFileSync(require.resolve('./config.json'));
@@ -34,6 +35,16 @@ fs.readdir(modelsDir, (err, files) => {
       socket.to(gameCode).emit('gameJoined');
       socket.join(gameCode);
     });
+
+    // INCOMPLETE!!!!
+    // socket.on('pieceMoved', ({ gameCode, pieceClass, pieceType, cell }) => {
+    //   Board.findOne({ game_code: gameCode }).then((foundBoard) => {
+    //     foundBoard.setPiece(piece, cell.x, cell.y);
+    //     foundBoard.save().then(() => {
+    //       socket.to(gameCode).emit('pieceMoved');
+    //     });
+    //   });
+    // });
 
     socket.on('disconnect', () => {
       console.log(`Client disconnected from game: ${socket.rooms[0]}`);

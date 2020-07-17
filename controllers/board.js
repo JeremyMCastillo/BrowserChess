@@ -30,6 +30,7 @@ var route = (app) => {
     var { username } = body;
 
     var player = new Player(username, Player.getRandomColor());
+    player.color = 'black';
 
     // TODO: Implement Grid model. Grid should have two player parameters
     // when creating a new grid, the first player slot is filled.

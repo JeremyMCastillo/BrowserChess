@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import { connect } from 'react-redux';
 import { Typography, Button } from '@material-ui/core';
 import { Alert } from '@material-ui/lab';
@@ -7,7 +7,6 @@ import PlayerStart from './PlayerStart';
 import PlayerJoin from './PlayerJoin';
 import { createNewGame, joinGame } from '../actions/LandingActions';
 import { useHistory } from 'react-router-dom';
-import openSocket from 'socket.io-client';
 
 const Landing = (props) => {
   const [state, setState] = useState({
@@ -17,10 +16,13 @@ const Landing = (props) => {
 
   let history = useHistory();
 
-  if (props.board.game_code) {
-    localStorage.setItem('gameCode', props.board.game_code);
-    history.push(`/game/${props.board.game_code}`);
-  }
+  useEffect(() => {
+    if (props.board.game_code) {
+      localStorage.setItem('gameCode', props.board.game_code);
+      // window.location.assign(`/game/${props.board.game_code}`);
+      history.push(`/game/${props.board.game_code}`);
+    }
+  }, [props.board]);
 
   const onNewGamePress = () => {
     setState({

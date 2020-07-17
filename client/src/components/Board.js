@@ -17,6 +17,7 @@ const Board = (props) => {
     const { x, y } = cell;
     return (
       <Cell
+        movePieceCallback={props.movePieceCallback}
         coordinates={{ x, y }}
         piece={cell.piece}
         onClick={() => props.onClick()}
@@ -27,17 +28,21 @@ const Board = (props) => {
   const board = [];
   if (props.board.matrix) {
     let yValues = range(8);
+    let xValues = range(8);
     if (props.player.color === 'black') {
-      console.log('Reversing board');
+      console.log('Reversing board x');
+      xValues = reverse(xValues);
+    } else {
+      console.log('Reversing board y');
       yValues = reverse(yValues);
     }
     console.log(yValues);
 
     yValues.forEach((y) => {
       let row = [];
-      for (let x = 0; x < 8; x++) {
+      xValues.forEach((x) => {
         row.push(renderCell(props.board.matrix[x][y]));
-      }
+      });
       board.push(<div className='columns is-mobile'>{row}</div>);
     });
   }

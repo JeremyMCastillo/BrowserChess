@@ -7,10 +7,10 @@ export default function Square(props) {
   let { x, y } = props.coordinates;
 
   const [selectedPiece, setSelectedPiece] = useState({
-    pieceClass,
-    pieceType,
-    x,
-    y
+    pieceClass: '',
+    pieceType: '',
+    x: '',
+    y: ''
   });
 
   const selectPiece = (e) => {
@@ -22,6 +22,7 @@ export default function Square(props) {
       x,
       y
     });
+    props.movePieceCallback(selectedPiece.pieceClass, selectedPiece.pieceType);
     console.log(selectedPiece);
   };
 
@@ -31,3 +32,9 @@ export default function Square(props) {
     </button>
   );
 }
+
+const mapStateToProps = (state) => {
+  let { selectedPiece } = state.gameState;
+
+  return { selectedPiece };
+};
