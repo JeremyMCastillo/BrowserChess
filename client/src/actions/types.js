@@ -5,3 +5,4 @@ export const CREATE_NEW_GAME = 'create_new_game';
 export const JOIN_GAME = 'join_game';
 export const LOADING = 'loading';
 export const NETWORK_ERROR = 'network_error';
+export const PIECE_SELECTED = 'piece_selected';

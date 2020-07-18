@@ -19,7 +19,7 @@ const Board = (props) => {
       <Cell
         movePieceCallback={props.movePieceCallback}
         coordinates={{ x, y }}
-        piece={cell.piece}
+        cell={cell}
         onClick={() => props.onClick()}
       />
     );

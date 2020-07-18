@@ -1,40 +1,37 @@
-import React, { useState } from 'react';
+import React from 'react';
+import { connect } from 'react-redux';
 import '../index.css';
+import { selectPiece } from '../actions/GameActions';
 
-export default function Square(props) {
-  let pieceClass = props.piece ? props.piece.color : '';
-  let pieceType = props.piece ? props.piece.type : '';
-  let { x, y } = props.coordinates;
-
-  const [selectedPiece, setSelectedPiece] = useState({
-    pieceClass: '',
-    pieceType: '',
-    x: '',
-    y: ''
-  });
-
-  const selectPiece = (e) => {
+const Cell = (props) => {
+  const onCellClick = (e) => {
     e.preventDefault();
-    setSelectedPiece({
-      ...selectedPiece,
-      pieceClass,
-      pieceType,
-      x,
-      y
-    });
-    props.movePieceCallback(selectedPiece.pieceClass, selectedPiece.pieceType);
-    console.log(selectedPiece);
+
+    // First click selects a piece, second click selects the cell to move to.
+    if (!props.selectedPiece.type && props.cell.piece.type) {
+      console.log('Alright! Selecting a piece!');
+      props.selectPiece(props.cell.piece ? props.cell.piece : {});
+    } else if (props.selectedPiece.type) {
+      console.log('Woohoo gonna move that piece!');
+      props.movePieceCallback(props.selectedPiece, props.cell);
+      // Clear selected piece
+      props.selectPiece({});
+    }
   };
 
   return (
-    <button className={`square piece column`} onClick={selectPiece}>
-      {props.piece ? props.piece.type : null}
+    <button className={`square piece column`} onClick={onCellClick}>
+      {props.cell.piece ? props.cell.piece.type : null}
     </button>
   );
-}
+};
 
 const mapStateToProps = (state) => {
   let { selectedPiece } = state.gameState;
 
   return { selectedPiece };
 };
+
+export default connect(mapStateToProps, {
+  selectPiece
+})(Cell);

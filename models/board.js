@@ -119,6 +119,15 @@ BoardSchema.methods.setPiece = function (piece) {
   this.matrix[piece.x][piece.y].piece = piece;
 };
 
+// Moves a piece from one cell to another
+// TODO: Need to check if move is valid and also update graveyards if piece is captured
+BoardSchema.methods.movePiece = function (piece, cell) {
+  this.matrix[piece.x][piece.y].piece = null;
+  piece.x = cell.x;
+  piece.y = cell.y;
+  this.setPiece(piece);
+};
+
 // Returns true if the board is empty
 BoardSchema.methods.isEmpty = function () {
   return !this.matrix.some((rows) => rows.some((cell) => cell.piece !== null));

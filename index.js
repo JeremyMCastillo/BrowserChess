@@ -2,7 +2,6 @@ var express = require('express');
 var bodyParser = require('body-parser');
 var fs = require('fs');
 var socketIo = require('socket.io');
-// var { Board } = require('./models/board');
 
 // Construct a config object based on json formatted settings.
 const contents = fs.readFileSync(require.resolve('./config.json'));
@@ -10,6 +9,7 @@ var config = JSON.parse(contents);
 
 var app = express();
 const http = require('http').Server(app);
+var { Board } = require('./models/board');
 
 // Place the config object onto our request,
 // making it easily accessible to our API routes.
@@ -32,19 +32,21 @@ fs.readdir(modelsDir, (err, files) => {
     console.log('New client connected');
     socket.on('gameJoined', ({ gameCode }) => {
       console.log(`New player joined the game with code ${gameCode}`);
-      socket.to(gameCode).emit('gameJoined');
+      io.sockets.in(gameCode).emit('gameJoined');
       socket.join(gameCode);
     });
 
     // INCOMPLETE!!!!
-    // socket.on('pieceMoved', ({ gameCode, pieceClass, pieceType, cell }) => {
-    //   Board.findOne({ game_code: gameCode }).then((foundBoard) => {
-    //     foundBoard.setPiece(piece, cell.x, cell.y);
-    //     foundBoard.save().then(() => {
-    //       socket.to(gameCode).emit('pieceMoved');
-    //     });
-    //   });
-    // });
+    socket.on('movePiece', ({ gameCode, piece, cell }) => {
+      console.log(`Got piece moved request! ${gameCode}`);
+      Board.findOne({ game_code: gameCode }).then((foundBoard) => {
+        foundBoard.movePiece(piece, cell);
+        foundBoard.save().then(() => {
+          console.log('Sending response back to room.');
+          io.sockets.in(gameCode).emit('pieceMoved');
+        });
+      });
+    });
 
     socket.on('disconnect', () => {
       console.log(`Client disconnected from game: ${socket.rooms[0]}`);

@@ -18,20 +18,22 @@ const Game = (props) => {
     socket.emit('gameJoined', { gameCode });
     socket.on('gameJoined', () => {
       setStatus('Player joined the game');
-      props.loadBoard(props.gameCode, props.player.name);
+      props.loadBoard(gameCode, props.player.name);
     });
     socket.on('gameDisconnected', () => {
       setStatus('Player left the game');
-      props.loadBoard(props.gameCode, props.player.name);
+      props.loadBoard(gameCode, props.player.name);
     });
     socket.on('pieceMoved', () => {
+      console.log('Got piece moved callback');
       setStatus('Player moved a piece');
-      props.loadBoard(props.gameCode, props.player.name);
+      props.loadBoard(gameCode, props.player.name);
     });
-  }, []);
+  }, [socket]);
 
-  const movePiece = (pieceClass, pieceType, cell) => {
-    socket.emit('movePiece', { pieceClass, pieceType, cell });
+  const movePiece = (piece, cell) => {
+    console.log('Sending piece move call.');
+    socket.emit('movePiece', { gameCode: gameCode, piece, cell });
   };
 
   console.log(gameCode);
