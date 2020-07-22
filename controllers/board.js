@@ -1,22 +1,20 @@
-const _ = require('lodash');
-const { Board } = require('../models/board');
-const { Player } = require('../models/players');
-const { PieceColor } = require('../models/pieces');
+const _ = require("lodash");
+const { Board } = require("../models/board");
+const { Player } = require("../models/players");
+const { PieceColor } = require("../models/pieces");
 
 var route = (app) => {
-  app.get('/board/:gameCode/:username', (req, res) => {
+  app.get("/board/:gameCode/:username", (req, res) => {
     var { gameCode, username } = req.params;
     console.log(`Loading board with code ${gameCode}`);
 
     Board.findOne({ game_code: gameCode })
       .then((board) => {
         if (!board) {
-          res.status(404).send({ error: 'Invalid game code.' });
+          res.status(404).send({ error: "Invalid game code." });
         } else {
           let player =
-            board.player_1.getName() === username
-              ? board.player_1
-              : board.player_2;
+            board.player_1.name === username ? board.player_1 : board.player_2;
           res.send({ board, player });
         }
       })
@@ -25,12 +23,12 @@ var route = (app) => {
       });
   });
 
-  app.post('/board/new-game', (req, res) => {
-    var body = _.pick(req.body, ['username']);
+  app.post("/board/new-game", (req, res) => {
+    var body = _.pick(req.body, ["username"]);
     var { username } = body;
 
     var player = new Player(username, Player.getRandomColor());
-    player.color = 'black';
+    player.color = "black";
 
     // TODO: Implement Grid model. Grid should have two player parameters
     // when creating a new grid, the first player slot is filled.
@@ -49,10 +47,10 @@ var route = (app) => {
       });
   });
 
-  app.post('/board/join-game', (req, res) => {
+  app.post("/board/join-game", (req, res) => {
     // TODO: Take a grid ID and username and fill in the second player slot. Return the grids info
     // once the player slot is saved.
-    var body = _.pick(req.body, ['gameCode', 'username']);
+    var body = _.pick(req.body, ["gameCode", "username"]);
     var { gameCode, username } = body;
 
     // Create new player, update grid and return grid info.

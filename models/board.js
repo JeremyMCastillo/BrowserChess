@@ -1,5 +1,5 @@
-const _ = require('lodash');
-const { Cell } = require('./cells');
+const _ = require("lodash");
+const { Cell } = require("./cells");
 const {
   Pawn,
   Rook,
@@ -7,16 +7,16 @@ const {
   Bishop,
   Queen,
   King,
-  PieceColor
-} = require('./pieces');
+  PieceColor,
+} = require("./pieces");
 
-const { mongoose } = require('../system/mongoose');
+const { mongoose } = require("../system/mongoose");
 
 var BoardSchema = new mongoose.Schema({
   boardId: mongoose.ObjectId,
   date: {
     type: Date,
-    default: Date.now
+    default: Date.now,
   },
   game_code: String,
   // Instantiating player ID on board generation
@@ -40,10 +40,10 @@ var BoardSchema = new mongoose.Schema({
         [#,#,#,#,#,#,#,#],
     ]
     */
-  matrix: [[Object]]
+  matrix: [[Object]],
 });
 
-BoardSchema.pre('save', function (next) {
+BoardSchema.pre("save", function (next) {
   if (
     !this.matrix ||
     typeof this.matrix === typeof undefined ||
@@ -105,7 +105,7 @@ BoardSchema.methods.toJson = function () {
   var board = this;
   var boardObject = board.toObject();
   // grid id, player 1 id, player 2 id
-  return _.pick(boardObject, ['player_1', 'player_2', 'game_code', 'matrix']);
+  return _.pick(boardObject, ["player_1", "player_2", "game_code", "matrix"]);
 };
 
 // Returns true if there is a piece occupying the cell located at
@@ -134,8 +134,8 @@ BoardSchema.methods.isEmpty = function () {
 };
 
 function makeid(length) {
-  var result = '';
-  var characters = 'ABCDEFGHIJKLMNOPQRSTUVWXYZ0123456789';
+  var result = "";
+  var characters = "ABCDEFGHIJKLMNOPQRSTUVWXYZ0123456789";
   var charactersLength = characters.length;
   for (var i = 0; i < length; i++) {
     result += characters.charAt(Math.floor(Math.random() * charactersLength));
@@ -154,6 +154,6 @@ BoardSchema.methods.generateBoardId = function () {
   });
 };
 
-var Board = mongoose.model('Board', BoardSchema);
+var Board = mongoose.model("Board", BoardSchema);
 
 module.exports = { Board };
