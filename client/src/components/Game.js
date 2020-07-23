@@ -20,14 +20,14 @@ const Game = (props) => {
 
   useEffect(() => {
     socket.on("gameJoined", () => {
-      props.loadBoard(gameCode, props.player.name);
+      props.loadBoard(gameCode);
     });
     socket.on("gameDisconnected", () => {
-      props.loadBoard(gameCode, props.player.name);
+      props.loadBoard(gameCode);
     });
     socket.on("pieceMoved", () => {
       console.log("Got piece moved callback");
-      props.loadBoard(gameCode, props.player.name);
+      props.loadBoard(gameCode);
     });
   }, [socket]);
 
