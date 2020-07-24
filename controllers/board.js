@@ -4,16 +4,8 @@ const { Player } = require("../models/players");
 const { PieceColor } = require("../models/pieces");
 
 var route = (app) => {
-  app.get("/board/:gameCode", (req, res) => {
-    var { gameCode } = req.params;
-
-    if (!req.cookies.player_info) {
-      res.status(500).send({ error: "Player not recognized." });
-      return;
-    }
-    let { player } = req.cookies.player_info;
-    let username = player.name;
-
+  app.get("/board/:gameCode/:username", (req, res) => {
+    var { gameCode, username } = req.params;
     console.log(`Loading board with code ${gameCode}`);
 
     Board.findOne({ game_code: gameCode })
@@ -36,6 +28,7 @@ var route = (app) => {
     var { username } = body;
 
     var player = new Player(username, Player.getRandomColor());
+    player.color = "black";
 
     // TODO: Implement Grid model. Grid should have two player parameters
     // when creating a new grid, the first player slot is filled.
@@ -46,9 +39,7 @@ var route = (app) => {
       .generateBoardId()
       .then(() => board.save())
       .then(() => {
-        res
-          .cookie("player_info", { player, gameCode: board.game_code })
-          .send({ board, player });
+        res.send({ board, player });
       })
       .catch((e) => {
         console.log(e);
@@ -77,9 +68,7 @@ var route = (app) => {
           gameToJoin
             .save()
             .then(() => {
-              res
-                .cookie("player_info", { player, gameCode: board.game_code })
-                .send({ board: gameToJoin, player });
+              res.send({ board: gameToJoin, player });
             })
             .catch((error) => {
               res.status(500).send({ error });

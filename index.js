@@ -2,7 +2,6 @@ var express = require("express");
 var bodyParser = require("body-parser");
 var fs = require("fs");
 var socketIo = require("socket.io");
-var cookieParser = require("cookie-parser");
 
 // Construct a config object based on json formatted settings.
 const contents = fs.readFileSync(require.resolve("./config.json"));
@@ -19,7 +18,6 @@ app.use((req, res, next) => {
   next();
 });
 app.use(bodyParser.json());
-app.use(cookieParser());
 
 // Routes are handled within each respective model
 const modelsDir = "./controllers/";
