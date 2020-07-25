@@ -1,11 +1,11 @@
-import React from 'react';
-import { useParams } from 'react-router-dom';
-import { connect } from 'react-redux';
-import Cell from './Cell';
-import { loadBoard } from '../actions/LandingActions';
-import '../index.css';
-import range from 'lodash/range';
-import reverse from 'lodash/reverse';
+import React from "react";
+import { useParams } from "react-router-dom";
+import { connect } from "react-redux";
+import Cell from "./Cell";
+import { loadBoard } from "../actions/LandingActions";
+import "../index.css";
+import range from "lodash/range";
+import reverse from "lodash/reverse";
 
 const Board = (props) => {
   let { gameCode } = useParams();
@@ -17,6 +17,7 @@ const Board = (props) => {
     const { x, y } = cell;
     return (
       <Cell
+        key={`${x}-${y}`}
         movePieceCallback={props.movePieceCallback}
         coordinates={{ x, y }}
         cell={cell}
@@ -29,11 +30,11 @@ const Board = (props) => {
   if (props.board.matrix) {
     let yValues = range(8);
     let xValues = range(8);
-    if (props.player.color === 'black') {
-      console.log('Reversing board x');
+    if (props.player.color === "black") {
+      console.log("Reversing board x");
       xValues = reverse(xValues);
     } else {
-      console.log('Reversing board y');
+      console.log("Reversing board y");
       yValues = reverse(yValues);
     }
     console.log(yValues);
@@ -43,12 +44,16 @@ const Board = (props) => {
       xValues.forEach((x) => {
         row.push(renderCell(props.board.matrix[x][y]));
       });
-      board.push(<div className='columns is-mobile'>{row}</div>);
+      board.push(
+        <div key={`row${y}`} className="columns is-mobile">
+          {row}
+        </div>
+      );
     });
   }
 
   return (
-    <div id='board' className='mt-6'>
+    <div id="board" className="mt-6">
       {board}
     </div>
   );

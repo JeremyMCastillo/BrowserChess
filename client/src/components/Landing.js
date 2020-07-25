@@ -1,34 +1,34 @@
-import React, { useState, useEffect } from 'react';
-import { connect } from 'react-redux';
-import { Typography, Button } from '@material-ui/core';
-import { Alert } from '@material-ui/lab';
-import knightLogo from '../images/knight black.svg';
-import PlayerStart from './PlayerStart';
-import PlayerJoin from './PlayerJoin';
-import { createNewGame, joinGame } from '../actions/LandingActions';
-import { useHistory } from 'react-router-dom';
+import React, { useState, useEffect } from "react";
+import { connect } from "react-redux";
+import { Typography, Button } from "@material-ui/core";
+import { Alert } from "@material-ui/lab";
+import knightLogo from "../images/knight black.svg";
+import PlayerStart from "./PlayerStart";
+import PlayerJoin from "./PlayerJoin";
+import { createNewGame, joinGame } from "../actions/LandingActions";
+import { useHistory } from "react-router-dom";
 
 const Landing = (props) => {
   const [state, setState] = useState({
     isNewGameFormShown: false,
-    isJoinGameFormShown: false
+    isJoinGameFormShown: false,
   });
 
   let history = useHistory();
 
   useEffect(() => {
     if (props.board.game_code) {
-      localStorage.setItem('gameCode', props.board.game_code);
+      localStorage.setItem("gameCode", props.board.game_code);
       // window.location.assign(`/game/${props.board.game_code}`);
       history.push(`/game/${props.board.game_code}`);
     }
-  }, [props.board]);
+  }, [props.board, history]);
 
   const onNewGamePress = () => {
     setState({
       ...state,
       isJoinGameFormShown: false,
-      isNewGameFormShown: !state.isNewGameFormShown
+      isNewGameFormShown: !state.isNewGameFormShown,
     });
   };
 
@@ -36,7 +36,7 @@ const Landing = (props) => {
     setState({
       ...state,
       isNewGameFormShown: false,
-      isJoinGameFormShown: !state.isJoinGameFormShown
+      isJoinGameFormShown: !state.isJoinGameFormShown,
     });
   };
 
@@ -54,8 +54,8 @@ const Landing = (props) => {
   const renderNewGameForm = () => {
     if (state.isNewGameFormShown) {
       return (
-        <div className='columns'>
-          <PlayerStart className='columns' />
+        <div className="columns">
+          <PlayerStart className="columns" />
         </div>
       );
     }
@@ -64,7 +64,7 @@ const Landing = (props) => {
   const renderJoinGameForm = () => {
     if (state.isJoinGameFormShown) {
       return (
-        <div className='columns'>
+        <div className="columns">
           <PlayerJoin />
         </div>
       );
@@ -74,12 +74,12 @@ const Landing = (props) => {
   const renderSubmitButton = () => {
     if (state.isNewGameFormShown || state.isJoinGameFormShown) {
       return (
-        <div className='columns mt-1'>
+        <div className="columns mt-1">
           <Button
             disabled={props.loading}
-            className='column'
-            variant='outlined'
-            color='primary'
+            className="column"
+            variant="outlined"
+            color="primary"
             onClick={onStartGame}
           >
             Submit
@@ -91,35 +91,36 @@ const Landing = (props) => {
 
   const renderErrorMessage = () => {
     if (props.error) {
-      return <Alert severity='error'>{props.error}</Alert>;
+      return <Alert severity="error">{props.error}</Alert>;
     }
   };
 
   return (
     <div>
       {renderErrorMessage()}
-      <div className='App-header'>
-        <Typography component='h1'>
-          Browser Chess <img className='piece' src={knightLogo} />
+      <div className="App-header">
+        <Typography component="h1">
+          Browser Chess{" "}
+          <img alt="Browser Chess Icon" className="piece" src={knightLogo} />
         </Typography>
-        <div className='columns'>
-          <div className='column'>
+        <div className="columns">
+          <div className="column">
             <Button
               onClick={onNewGamePress}
-              variant='contained'
-              color='primary'
-              className='button'
+              variant="contained"
+              color="primary"
+              className="button"
               disabled={props.loading}
             >
               Create New Game
             </Button>
           </div>
-          <div className='column'>
+          <div className="column">
             <Button
               onClick={onJoinGamePress}
-              variant='contained'
-              color='primary'
-              className='button'
+              variant="contained"
+              color="primary"
+              className="button"
               disabled={props.loading}
             >
               Join Game
@@ -142,7 +143,7 @@ const mapStateToProps = (state) => {
     error,
     board,
     player_1,
-    player_2
+    player_2,
   } = state.landing;
 
   return { username, gameCode, loading, error, board, player_1, player_2 };
@@ -150,5 +151,5 @@ const mapStateToProps = (state) => {
 
 export default connect(mapStateToProps, {
   createNewGame,
-  joinGame
+  joinGame,
 })(Landing);

@@ -1,11 +1,11 @@
-import axios from 'axios';
+import axios from "axios";
 import {
   LANDING_FORM_UPDATE,
   CREATE_NEW_GAME,
   JOIN_GAME,
   NETWORK_ERROR,
-  LOADING
-} from './types';
+  LOADING,
+} from "./types";
 
 export const createNewGame = (username) => {
   const body = { username };
@@ -13,22 +13,22 @@ export const createNewGame = (username) => {
   return (dispatch) => {
     dispatch({
       type: LOADING,
-      payload: {}
+      payload: {},
     });
     axios
-      .post('/board/new-game', body)
+      .post("/board/new-game", body)
       .then((response) => {
         console.log(response);
         let { board, player } = response.data;
         dispatch({
           type: CREATE_NEW_GAME,
-          payload: { board, player }
+          payload: { board, player },
         });
       })
       .catch((err) => {
         dispatch({
           type: NETWORK_ERROR,
-          payload: { error: err.message }
+          payload: { error: err.message },
         });
       });
   };
@@ -40,16 +40,16 @@ export const joinGame = (username, gameCode) => {
   return (dispatch) => {
     dispatch({
       type: LOADING,
-      payload: {}
+      payload: {},
     });
     axios
-      .post('/board/join-game', body)
+      .post("/board/join-game", body)
       .then((response) => {
         console.log(response);
         let { board, player } = response.data;
         dispatch({
           type: JOIN_GAME,
-          payload: { board, player }
+          payload: { board, player },
         });
       })
       .catch((err) => {
@@ -60,30 +60,30 @@ export const joinGame = (username, gameCode) => {
             error:
               err.response.status === 404
                 ? "We couldn't find a game with that code, please try again."
-                : err.message
-          }
+                : err.message,
+          },
         });
       });
   };
 };
 
-export const loadBoard = (gameCode, username) => {
+export const loadBoard = (gameCode) => {
   return (dispatch) => {
     axios
-      .get(`/board/${gameCode}/${username}`)
+      .get(`/board/${gameCode}`)
       .then((response) => {
         let { board, player } = response.data;
         dispatch({
           type: JOIN_GAME,
-          payload: { board, player }
+          payload: { board, player },
         });
       })
       .catch((error) => {
         dispatch({
           type: NETWORK_ERROR,
           payload: {
-            error: error.message
-          }
+            error: error.message,
+          },
         });
       });
   };
@@ -92,6 +92,6 @@ export const loadBoard = (gameCode, username) => {
 export const onRegisterFieldUpdate = ({ prop, value }) => {
   return {
     type: LANDING_FORM_UPDATE,
-    payload: { prop, value }
+    payload: { prop, value },
   };
 };

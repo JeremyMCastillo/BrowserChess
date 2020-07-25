@@ -1,6 +1,5 @@
-import React, { useState, useEffect } from "react";
+import React, { useEffect } from "react";
 import { useParams, useHistory } from "react-router-dom";
-import { Alert } from "@material-ui/lab";
 import { connect } from "react-redux";
 import openSocket from "socket.io-client";
 import "../index.css";
@@ -10,7 +9,6 @@ import { loadBoard } from "../actions/LandingActions";
 const socket = openSocket("/");
 
 const Game = (props) => {
-  let [status, setStatus] = useState("Joining the game.");
   let { gameCode } = useParams();
   let history = useHistory();
 
@@ -20,14 +18,14 @@ const Game = (props) => {
 
   useEffect(() => {
     socket.on("gameJoined", () => {
-      props.loadBoard(gameCode, props.player.name);
+      props.loadBoard(gameCode);
     });
     socket.on("gameDisconnected", () => {
-      props.loadBoard(gameCode, props.player.name);
+      props.loadBoard(gameCode);
     });
     socket.on("pieceMoved", () => {
       console.log("Got piece moved callback");
-      props.loadBoard(gameCode, props.player.name);
+      props.loadBoard(gameCode);
     });
   }, [socket]);
 
@@ -42,15 +40,8 @@ const Game = (props) => {
     history.push("/");
   }
 
-  const renderAlert = () => {
-    if (status) {
-      return <Alert severity="info">{status}</Alert>;
-    }
-  };
-
   return (
     <div>
-      {renderAlert()}
       <div className="columns">
         <div className="column is-narrow">
           <Graveyard />

@@ -1,14 +1,14 @@
 body {
   margin: 0;
-  font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', 'Roboto', 'Oxygen',
-    'Ubuntu', 'Cantarell', 'Fira Sans', 'Droid Sans', 'Helvetica Neue',
+  font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", "Roboto", "Oxygen",
+    "Ubuntu", "Cantarell", "Fira Sans", "Droid Sans", "Helvetica Neue",
     sans-serif;
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
 }
 
 code {
-  font-family: source-code-pro, Menlo, Monaco, Consolas, 'Courier New',
+  font-family: source-code-pro, Menlo, Monaco, Consolas, "Courier New",
     monospace;
 }
 
@@ -17,22 +17,73 @@ code {
   height: 575px;
   margin: 35px auto;
   border: 15px solid black;
-  padding:15px;
-
+  padding: 15px;
 }
 
-#board .columns:nth-child(even) 
-.square.column:nth-child(even) {
-  background: forestgreen;
+#board .columns:nth-child(even) .square.column:nth-child(even) {
+  background-color: forestgreen;
 }
 
-#board .columns:nth-child(odd) 
-.square.column:nth-child(odd) {
-  background: forestgreen;
+#board .columns:nth-child(odd) .square.column:nth-child(odd) {
+  background-color: forestgreen;
 }
 
 #board .column {
   width: 67.5px;
   height: 67.5px;
   border: none;
+}
+
+#board .square.piece {
+  background-position: center;
+  background-size: contain;
+  background-repeat: no-repeat;
+}
+
+#board .square.piece.pawn.white {
+  background-image: url("./images/pawn\ white.svg");
+}
+
+#board .square.piece.rook.white {
+  background-image: url("./images/rook\ white.svg");
+}
+
+#board .square.piece.knight.white {
+  background-image: url("./images/knight\ white.svg");
+}
+
+#board .square.piece.bishop.white {
+  background-image: url("./images/bishop\ white.svg");
+}
+
+#board .square.piece.queen.white {
+  background-image: url("./images/queen\ white.svg");
+}
+
+#board .square.piece.king.white {
+  background-image: url("./images/knight\ white.svg");
+}
+
+#board .square.piece.pawn.black {
+  background-image: url("./images/pawn\ black.svg");
+}
+
+#board .square.piece.rook.black {
+  background-image: url("./images/pawn\ black.svg");
+}
+
+#board .square.piece.knight.black {
+  background-image: url("./images/knight\ black.svg");
+}
+
+#board .square.piece.bishop.black {
+  background-image: url("./images/bishop\ black.svg");
+}
+
+#board .square.piece.queen.black {
+  background-image: url("./images/queen\ black.svg");
+}
+
+#board .square.piece.king.black {
+  background-image: url("./images/king\ black.svg");
 }
