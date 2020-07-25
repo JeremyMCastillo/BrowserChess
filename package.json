@@ -31,6 +31,7 @@
     "http": "0.0.1-security",
     "jsonwebtoken": "^8.5.1",
     "lodash": "^4.17.15",
+    "mongodb-memory-server": "^6.6.1",
     "mongoose": "^5.9.18",
     "redux": "^4.0.5",
     "redux-thunk": "^2.3.0",
