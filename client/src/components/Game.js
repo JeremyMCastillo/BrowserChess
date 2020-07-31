@@ -1,56 +1,56 @@
-import React, { useEffect } from "react";
-import { useParams, useHistory } from "react-router-dom";
-import { connect } from "react-redux";
-import openSocket from "socket.io-client";
-import "../index.css";
-import Board from "./Board";
-import { Graveyard } from "./Graveyard";
-import { loadBoard } from "../actions/LandingActions";
-const socket = openSocket("/");
+import React, { useEffect } from 'react';
+import { useParams, useHistory } from 'react-router-dom';
+import { connect } from 'react-redux';
+import openSocket from 'socket.io-client';
+import '../index.css';
+import Board from './Board';
+import Player from './Player';
+import { loadBoard } from '../actions/LandingActions';
+const socket = openSocket('/');
 
 const Game = (props) => {
   let { gameCode } = useParams();
   let history = useHistory();
 
   useEffect(() => {
-    socket.emit("gameJoined", { gameCode });
+    socket.emit('gameJoined', { gameCode });
   }, []);
 
   useEffect(() => {
-    socket.on("gameJoined", () => {
+    socket.on('gameJoined', () => {
       props.loadBoard(gameCode);
     });
-    socket.on("gameDisconnected", () => {
+    socket.on('gameDisconnected', () => {
       props.loadBoard(gameCode);
     });
-    socket.on("pieceMoved", () => {
-      console.log("Got piece moved callback");
+    socket.on('pieceMoved', () => {
+      console.log('Got piece moved callback');
       props.loadBoard(gameCode);
     });
   }, [socket]);
 
   const movePiece = (piece, cell) => {
-    console.log("Sending piece move call.");
-    socket.emit("movePiece", { gameCode: gameCode, piece, cell });
+    console.log('Sending piece move call.');
+    socket.emit('movePiece', { gameCode: gameCode, piece, cell });
   };
 
   console.log(gameCode);
 
   if (!props.board.game_code) {
-    history.push("/");
+    history.push('/');
   }
 
   return (
     <div>
-      <div className="columns">
-        <div className="column is-narrow">
-          <Graveyard />
+      <div className='columns'>
+        <div className='column is-one-fifth'>
+          <Player turn={props.board.turn} player={props.board.player_1} />
         </div>
-        <div className="column">
+        <div className='column'>
           <Board movePieceCallback={movePiece} />
         </div>
-        <div className="column is-narrow">
-          <Graveyard />
+        <div className='column is-one-fifth'>
+          <Player board={props.board} player={props.board.player_2} />
         </div>
       </div>
     </div>
@@ -64,5 +64,5 @@ const mapStateToProps = (state) => {
 };
 
 export default connect(mapStateToProps, {
-  loadBoard,
+  loadBoard
 })(Game);
