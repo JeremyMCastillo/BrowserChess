@@ -1,9 +1,9 @@
-const { Piece, PieceType, PieceColor } = require('./pieces');
-const { Cell } = require('../cells');
+const { Piece, PieceType, PieceColor } = require("./pieces");
+const { Cell } = require("../cells");
 
 class Pawn extends Piece {
   constructor(color, x, y) {
-    super(PieceType.pawn, color);
+    super(PieceType.pawn, color, x, y);
     this.x = x;
     this.y = y;
   }

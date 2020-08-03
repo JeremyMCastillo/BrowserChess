@@ -27,7 +27,15 @@ const Game = (props) => {
       console.log("Got piece moved callback");
       props.loadBoard(gameCode);
     });
+    socket.on("validMoves", (cells) => {
+      console.log("Got valid moves");
+      console.log(cells);
+    });
   }, [socket]);
+
+  const selectPiece = (piece) => {
+    socket.emit("selectPiece", { gameCode, piece });
+  };
 
   const movePiece = (piece, cell) => {
     console.log("Sending piece move call.");
@@ -47,7 +55,10 @@ const Game = (props) => {
           <Player board={props.board} player={props.board.player_1} />
         </div>
         <div className="column">
-          <Board movePieceCallback={movePiece} />
+          <Board
+            selectPieceCallback={selectPiece}
+            movePieceCallback={movePiece}
+          />
         </div>
         <div className="column is-one-fifth">
           <Player board={props.board} player={props.board.player_2} />

@@ -1,10 +1,10 @@
-const { Piece, PieceType } = require('./pieces');
-const { Rook } = require('./rooks');
-const { Bishop } = require('./bishops');
+const { Piece, PieceType } = require("./pieces");
+const { Rook } = require("./rooks");
+const { Bishop } = require("./bishops");
 
 class Queen extends Piece {
   constructor(color, x, y) {
-    super(PieceType.queen, color);
+    super(PieceType.queen, color, x, y);
     this.x = x;
     this.y = y;
   }

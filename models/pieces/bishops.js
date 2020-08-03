@@ -1,9 +1,9 @@
-const { Piece, PieceType } = require('./pieces');
-const { Cell } = require('../cells');
+const { Piece, PieceType } = require("./pieces");
+const { Cell } = require("../cells");
 
 class Bishop extends Piece {
   constructor(color, x, y) {
-    super(PieceType.bishop, color);
+    super(PieceType.bishop, color, x, y);
     this.x = x;
     this.y = y;
   }
