@@ -1,11 +1,11 @@
-const { assert } = require('chai');
-const { PieceType, PieceColor } = require('../../models/pieces/pieces');
-const { Queen } = require('../../models/pieces/queens');
-const { TestHelpers } = require('../helpers');
+const { assert } = require("chai");
+const { PieceType, PieceColor } = require("../../models/pieces/pieces");
+const { Queen } = require("../../models/pieces/queens");
+const { TestHelpers } = require("../helpers");
 
-describe('Pawns model', () => {
-  describe('create operations', () => {
-    it('should successfully create a new pawn', () => {
+describe("Pawns model", () => {
+  describe("create operations", () => {
+    it("should successfully create a Pawn.initialize", () => {
       let queen = new Queen(PieceColor.white, 4, 3);
 
       assert.isNotNull(queen);
@@ -14,8 +14,8 @@ describe('Pawns model', () => {
     });
   });
 
-  describe('queen movement', () => {
-    it('should test queen movement on an empty board', () => {
+  describe("queen movement", () => {
+    it("should test queen movement on an empty board", () => {
       let queen = new Queen(PieceColor.white, 4, 3);
       let board = TestHelpers.initEmptyBoard();
       let possibleMoves = queen.getValidMoves(board);
@@ -24,7 +24,7 @@ describe('Pawns model', () => {
       assert.equal(possibleMoves.length, 27);
     });
 
-    it('should be able to capture an opposing diagonal piece', () => {
+    it("should be able to capture an opposing diagonal piece", () => {
       let queen = new Queen(PieceColor.white, 3, 4);
       let queen2 = new Queen(PieceColor.black, 4, 3);
       let board = TestHelpers.initEmptyBoard();
@@ -38,7 +38,7 @@ describe('Pawns model', () => {
       assert.isTrue(validMoves.some((cell) => cell.x === 4 && cell.y === 3));
     });
 
-    it('should be able to capture an opposing rank piece', () => {
+    it("should be able to capture an opposing rank piece", () => {
       let queen = new Queen(PieceColor.white, 3, 4);
       let queen2 = new Queen(PieceColor.black, 4, 4);
       let board = TestHelpers.initEmptyBoard();
@@ -52,7 +52,7 @@ describe('Pawns model', () => {
       assert.isTrue(validMoves.some((cell) => cell.x === 4 && cell.y === 4));
     });
 
-    it('should be able to capture an opposing file piece', () => {
+    it("should be able to capture an opposing file piece", () => {
       let queen = new Queen(PieceColor.white, 3, 4);
       let queen2 = new Queen(PieceColor.black, 3, 3);
       let board = TestHelpers.initEmptyBoard();
@@ -66,7 +66,7 @@ describe('Pawns model', () => {
       assert.isTrue(validMoves.some((cell) => cell.x === 3 && cell.y === 3));
     });
 
-    it('should not be able to capture a friendly diagonal piece', () => {
+    it("should not be able to capture a friendly diagonal piece", () => {
       let queen = new Queen(PieceColor.white, 3, 4);
       let queen2 = new Queen(PieceColor.white, 4, 3);
       let board = TestHelpers.initEmptyBoard();
@@ -80,7 +80,7 @@ describe('Pawns model', () => {
       assert.isFalse(validMoves.some((cell) => cell.x === 4 && cell.y === 3));
     });
 
-    it('should not be able to capture a friendly rank piece', () => {
+    it("should not be able to capture a friendly rank piece", () => {
       let queen = new Queen(PieceColor.white, 3, 4);
       let queen2 = new Queen(PieceColor.white, 4, 4);
       let board = TestHelpers.initEmptyBoard();
@@ -94,7 +94,7 @@ describe('Pawns model', () => {
       assert.isFalse(validMoves.some((cell) => cell.x === 4 && cell.y === 4));
     });
 
-    it('should not be able to capture a friendly file piece', () => {
+    it("should not be able to capture a friendly file piece", () => {
       let queen = new Queen(PieceColor.white, 3, 4);
       let queen2 = new Queen(PieceColor.white, 3, 3);
       let board = TestHelpers.initEmptyBoard();

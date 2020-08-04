@@ -1,5 +1,5 @@
 const _ = require("lodash");
-const { Cell } = require("./cells");
+const { Cell, CellSchema } = require("./cells");
 const {
   Pawn,
   Rook,
@@ -40,7 +40,7 @@ var BoardSchema = new mongoose.Schema({
         [#,#,#,#,#,#,#,#],
     ]
     */
-  matrix: [[Cell]],
+  matrix: [[CellSchema]],
   turn: String,
 });
 
@@ -60,21 +60,23 @@ BoardSchema.pre("save", function (next) {
 
 BoardSchema.methods.initializeEmptyBoard = function () {
   // Initialize the 2D matrix with the player assigned to their beginning side
-  this.matrix = _.range(8).map((x) => _.range(8).map((y) => new Cell(x, y)));
+  this.matrix = _.range(8).map((x) =>
+    _.range(8).map((y) => Cell.initialize(x, y))
+  );
 };
 
 BoardSchema.methods.populate = function () {
   // Populate the board with the full set of cells
   // Begin with correct pieces for each player
   // append pieces to the correct cell
-  this.setPiece(new Pawn(PieceColor.white, 0, 1));
-  this.setPiece(new Pawn(PieceColor.white, 1, 1));
-  this.setPiece(new Pawn(PieceColor.white, 2, 1));
-  this.setPiece(new Pawn(PieceColor.white, 3, 1));
-  this.setPiece(new Pawn(PieceColor.white, 4, 1));
-  this.setPiece(new Pawn(PieceColor.white, 5, 1));
-  this.setPiece(new Pawn(PieceColor.white, 6, 1));
-  this.setPiece(new Pawn(PieceColor.white, 7, 1));
+  this.setPiece(Pawn.initialize(PieceColor.white, 0, 1));
+  this.setPiece(Pawn.initialize(PieceColor.white, 1, 1));
+  this.setPiece(Pawn.initialize(PieceColor.white, 2, 1));
+  this.setPiece(Pawn.initialize(PieceColor.white, 3, 1));
+  this.setPiece(Pawn.initialize(PieceColor.white, 4, 1));
+  this.setPiece(Pawn.initialize(PieceColor.white, 5, 1));
+  this.setPiece(Pawn.initialize(PieceColor.white, 6, 1));
+  this.setPiece(Pawn.initialize(PieceColor.white, 7, 1));
   this.setPiece(new Rook(PieceColor.white, 0, 0));
   this.setPiece(new Rook(PieceColor.white, 7, 0));
   this.setPiece(new Knight(PieceColor.white, 1, 0));
@@ -84,14 +86,14 @@ BoardSchema.methods.populate = function () {
   this.setPiece(new Queen(PieceColor.white, 3, 0));
   this.setPiece(new King(PieceColor.white, 4, 0));
 
-  this.setPiece(new Pawn(PieceColor.black, 0, 6));
-  this.setPiece(new Pawn(PieceColor.black, 1, 6));
-  this.setPiece(new Pawn(PieceColor.black, 2, 6));
-  this.setPiece(new Pawn(PieceColor.black, 3, 6));
-  this.setPiece(new Pawn(PieceColor.black, 4, 6));
-  this.setPiece(new Pawn(PieceColor.black, 5, 6));
-  this.setPiece(new Pawn(PieceColor.black, 6, 6));
-  this.setPiece(new Pawn(PieceColor.black, 7, 6));
+  this.setPiece(Pawn.initialize(PieceColor.black, 0, 6));
+  this.setPiece(Pawn.initialize(PieceColor.black, 1, 6));
+  this.setPiece(Pawn.initialize(PieceColor.black, 2, 6));
+  this.setPiece(Pawn.initialize(PieceColor.black, 3, 6));
+  this.setPiece(Pawn.initialize(PieceColor.black, 4, 6));
+  this.setPiece(Pawn.initialize(PieceColor.black, 5, 6));
+  this.setPiece(Pawn.initialize(PieceColor.black, 6, 6));
+  this.setPiece(Pawn.initialize(PieceColor.black, 7, 6));
   this.setPiece(new Rook(PieceColor.black, 0, 7));
   this.setPiece(new Rook(PieceColor.black, 7, 7));
   this.setPiece(new Knight(PieceColor.black, 1, 7));

@@ -1,16 +1,24 @@
 const { mongoose } = require("../system/mongoose");
+const { PieceSchema } = require("./pieces");
 
-class Cell extends mongoose.SchemaType {
-  // TODO: https://mongoosejs.com/docs/customschematypes.html
-  constructor(x, y) {
-    this.x = x;
-    this.y = y;
-    this.piece = null;
-  }
+var CellSchema = new mongoose.Schema({
+  x: Number,
+  y: Number,
+  piece: PieceSchema,
+});
 
-  setPiece(piece) {
-    this.piece = piece;
-  }
-}
+CellSchema.statics.initialize = (x, y) => {
+  let cell = new Cell();
+  cell.x = x;
+  cell.y = y;
+  cell.piece = null;
+  return cell;
+};
 
-module.exports = { Cell };
+CellSchema.methods.setPiece = (piece) => {
+  this.piece = piece;
+};
+
+var Cell = mongoose.model("Cell", CellSchema);
+
+module.exports = { Cell, CellSchema };

@@ -3,7 +3,7 @@ const { Cell } = require("../cells");
 
 class Bishop extends Piece {
   constructor(color, x, y) {
-    super(PieceType.bishop, color, x, y);
+    super(PieceType.bishop, color);
     this.x = x;
     this.y = y;
   }
@@ -19,11 +19,11 @@ class Bishop extends Piece {
     while (i >= 0 && j >= 0) {
       if (board.hasPieceAt(i, j)) {
         if (board.matrix[i][j].piece.getColor() !== this.color) {
-          validMoves.push(new Cell(i, j));
+          validMoves.push(Cell.initialize(i, j));
         }
         break;
       } else {
-        validMoves.push(new Cell(i, j));
+        validMoves.push(Cell.initialize(i, j));
       }
       i -= 1;
       j -= 1;
@@ -35,11 +35,11 @@ class Bishop extends Piece {
     while (i >= 0 && j < 8) {
       if (board.hasPieceAt(i, j)) {
         if (board.matrix[i][j].piece.getColor() !== this.color) {
-          validMoves.push(new Cell(i, j));
+          validMoves.push(Cell.initialize(i, j));
         }
         break;
       } else {
-        validMoves.push(new Cell(i, j));
+        validMoves.push(Cell.initialize(i, j));
       }
       i -= 1;
       j += 1;
@@ -51,11 +51,11 @@ class Bishop extends Piece {
     while (i < 8 && j < 8) {
       if (board.hasPieceAt(i, j)) {
         if (board.matrix[i][j].piece.getColor() !== this.color) {
-          validMoves.push(new Cell(i, j));
+          validMoves.push(Cell.initialize(i, j));
         }
         break;
       } else {
-        validMoves.push(new Cell(i, j));
+        validMoves.push(Cell.initialize(i, j));
       }
       i += 1;
       j += 1;
@@ -67,11 +67,11 @@ class Bishop extends Piece {
     while (i < 8 && j >= 0) {
       if (board.hasPieceAt(i, j)) {
         if (board.matrix[i][j].piece.getColor() !== this.color) {
-          validMoves.push(new Cell(i, j));
+          validMoves.push(Cell.initialize(i, j));
         }
         break;
       } else {
-        validMoves.push(new Cell(i, j));
+        validMoves.push(Cell.initialize(i, j));
       }
       i += 1;
       j -= 1;

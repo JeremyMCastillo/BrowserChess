@@ -1,29 +1,29 @@
-const { assert } = require('chai');
-const { PieceColor } = require('../../models/pieces/pieces');
-const { Pawn } = require('../../models/pieces/pawns');
-const { Rook } = require('../../models/pieces/rooks');
-const { Bishop } = require('../../models/pieces/bishops');
-const { Knight } = require('../../models/pieces/knights');
-const { King } = require('../../models/pieces/kings');
-const { Queen } = require('../../models/pieces/queens');
-const { TestHelpers } = require('../helpers');
+const { assert } = require("chai");
+const { PieceColor } = require("../../models/pieces/pieces");
+const { Pawn } = require("../../models/pieces/pawns");
+const { Rook } = require("../../models/pieces/rooks");
+const { Bishop } = require("../../models/pieces/bishops");
+const { Knight } = require("../../models/pieces/knights");
+const { King } = require("../../models/pieces/kings");
+const { Queen } = require("../../models/pieces/queens");
+const { TestHelpers } = require("../helpers");
 
 /*
 TODO:
     Write tests that specifically check whether a piece exists on a certain cell of the board
 */
 
-describe('initialize player pieces', () => {
-  it('should test white piece placement on board', () => {
+describe("initialize player pieces", () => {
+  it("should test white piece placement on board", () => {
     let board = TestHelpers.initEmptyBoard();
-    let whitePawn1 = new Pawn(PieceColor.white, 0, 1);
-    let whitePawn2 = new Pawn(PieceColor.white, 1, 1);
-    let whitePawn3 = new Pawn(PieceColor.white, 2, 1);
-    let whitePawn4 = new Pawn(PieceColor.white, 3, 1);
-    let whitePawn5 = new Pawn(PieceColor.white, 4, 1);
-    let whitePawn6 = new Pawn(PieceColor.white, 5, 1);
-    let whitePawn7 = new Pawn(PieceColor.white, 6, 1);
-    let whitePawn8 = new Pawn(PieceColor.white, 7, 1);
+    let whitePawn1 = Pawn.initialize(PieceColor.white, 0, 1);
+    let whitePawn2 = Pawn.initialize(PieceColor.white, 1, 1);
+    let whitePawn3 = Pawn.initialize(PieceColor.white, 2, 1);
+    let whitePawn4 = Pawn.initialize(PieceColor.white, 3, 1);
+    let whitePawn5 = Pawn.initialize(PieceColor.white, 4, 1);
+    let whitePawn6 = Pawn.initialize(PieceColor.white, 5, 1);
+    let whitePawn7 = Pawn.initialize(PieceColor.white, 6, 1);
+    let whitePawn8 = Pawn.initialize(PieceColor.white, 7, 1);
     let whiteRook1 = new Rook(PieceColor.white, 0, 0);
     let whiteRook2 = new Rook(PieceColor.white, 7, 0);
     let whiteKnight1 = new Knight(PieceColor.white, 1, 0);
@@ -58,16 +58,16 @@ describe('initialize player pieces', () => {
     assert.isFalse(board.isEmpty());
   });
 
-  it('should test black piece placement on board', () => {
+  it("should test black piece placement on board", () => {
     let board = TestHelpers.initEmptyBoard();
-    let blackPawn1 = new Pawn(PieceColor.black, 0, 6);
-    let blackPawn2 = new Pawn(PieceColor.black, 1, 6);
-    let blackPawn3 = new Pawn(PieceColor.black, 2, 6);
-    let blackPawn4 = new Pawn(PieceColor.black, 3, 6);
-    let blackPawn5 = new Pawn(PieceColor.black, 4, 6);
-    let blackPawn6 = new Pawn(PieceColor.black, 5, 6);
-    let blackPawn7 = new Pawn(PieceColor.black, 6, 6);
-    let blackPawn8 = new Pawn(PieceColor.black, 7, 6);
+    let blackPawn1 = Pawn.initialize(PieceColor.black, 0, 6);
+    let blackPawn2 = Pawn.initialize(PieceColor.black, 1, 6);
+    let blackPawn3 = Pawn.initialize(PieceColor.black, 2, 6);
+    let blackPawn4 = Pawn.initialize(PieceColor.black, 3, 6);
+    let blackPawn5 = Pawn.initialize(PieceColor.black, 4, 6);
+    let blackPawn6 = Pawn.initialize(PieceColor.black, 5, 6);
+    let blackPawn7 = Pawn.initialize(PieceColor.black, 6, 6);
+    let blackPawn8 = Pawn.initialize(PieceColor.black, 7, 6);
     let blackRook1 = new Rook(PieceColor.black, 0, 7);
     let blackRook2 = new Rook(PieceColor.black, 7, 7);
     let blackKnight1 = new Knight(PieceColor.black, 7, 1);

@@ -3,7 +3,7 @@ const { Cell } = require("../cells");
 
 class King extends Piece {
   constructor(color, x, y) {
-    super(PieceType.king, color, x, y);
+    super(PieceType.king, color);
     this.x = x;
     this.y = y;
   }
@@ -20,10 +20,10 @@ class King extends Piece {
       if (
         board.matrix[currentX + 1][currentY].piece.getColor() !== this.color
       ) {
-        validMoves.push(new Cell(currentX + 1, currentY));
+        validMoves.push(Cell.initialize(currentX + 1, currentY));
       }
     } else {
-      validMoves.push(new Cell(currentX + 1, currentY));
+      validMoves.push(Cell.initialize(currentX + 1, currentY));
     }
 
     // one space diagonal left forward
@@ -31,10 +31,10 @@ class King extends Piece {
       if (
         board.matrix[currentX + 1][currentY + 1].piece.getColor() !== this.color
       ) {
-        validMoves.push(new Cell(currentX + 1, currentY - 1));
+        validMoves.push(Cell.initialize(currentX + 1, currentY - 1));
       }
     } else {
-      validMoves.push(new Cell(currentX + 1, currentY - 1));
+      validMoves.push(Cell.initialize(currentX + 1, currentY - 1));
     }
 
     // one space diagonal right forward
@@ -42,10 +42,10 @@ class King extends Piece {
       if (
         board.matrix[currentX + 1][currentY + 1].piece.getColor() !== this.color
       ) {
-        validMoves.push(new Cell(currentX + 1, currentY + 1));
+        validMoves.push(Cell.initialize(currentX + 1, currentY + 1));
       }
     } else {
-      validMoves.push(new Cell(currentX + 1, currentY + 1));
+      validMoves.push(Cell.initialize(currentX + 1, currentY + 1));
     }
 
     // one space backward
@@ -53,10 +53,10 @@ class King extends Piece {
       if (
         board.matrix[currentX + 1][currentY].piece.getColor() !== this.color
       ) {
-        validMoves.push(new Cell(currentX - 1, currentY));
+        validMoves.push(Cell.initialize(currentX - 1, currentY));
       }
     } else {
-      validMoves.push(new Cell(currentX - 1, currentY));
+      validMoves.push(Cell.initialize(currentX - 1, currentY));
     }
 
     // one space diagonal left backward
@@ -64,10 +64,10 @@ class King extends Piece {
       if (
         board.matrix[currentX - 1][currentY - 1].piece.getColor() !== this.color
       ) {
-        validMoves.push(new Cell(currentX - 1, currentY - 1));
+        validMoves.push(Cell.initialize(currentX - 1, currentY - 1));
       }
     } else {
-      validMoves.push(new Cell(currentX - 1, currentY - 1));
+      validMoves.push(Cell.initialize(currentX - 1, currentY - 1));
     }
 
     // one space diagonal right backward
@@ -75,10 +75,10 @@ class King extends Piece {
       if (
         board.matrix[currentX - 1][currentY + 1].piece.getColor() !== this.color
       ) {
-        validMoves.push(new Cell(currentX - 1, currentY + 1));
+        validMoves.push(Cell.initialize(currentX - 1, currentY + 1));
       }
     } else {
-      validMoves.push(new Cell(currentX - 1, currentY + 1));
+      validMoves.push(Cell.initialize(currentX - 1, currentY + 1));
     }
 
     // one space right
@@ -86,10 +86,10 @@ class King extends Piece {
       if (
         board.matrix[currentX][currentY + 1].piece.getColor() !== this.color
       ) {
-        validMoves.push(new Cell(currentX, currentY + 1));
+        validMoves.push(Cell.initialize(currentX, currentY + 1));
       }
     } else {
-      validMoves.push(new Cell(currentX, currentY + 1));
+      validMoves.push(Cell.initialize(currentX, currentY + 1));
     }
 
     // one space left
@@ -97,10 +97,10 @@ class King extends Piece {
       if (
         board.matrix[currentX][currentY - 1].piece.getColor() !== this.color
       ) {
-        validMoves.push(new Cell(currentX, currentY - 1));
+        validMoves.push(Cell.initialize(currentX, currentY - 1));
       }
     } else {
-      validMoves.push(new Cell(currentX, currentY - 1));
+      validMoves.push(Cell.initialize(currentX, currentY - 1));
     }
     return validMoves;
   }

@@ -1,3 +1,7 @@
+const { mongoose } = require("../../system/mongoose");
+
+var PieceDiscriminator = { discriminatorKey: "kind" };
+
 const PieceType = {
   pawn: "pawn",
   rook: "rook",
@@ -12,32 +16,28 @@ const PieceColor = {
   black: "black",
 };
 
-class Piece {
-  constructor(type, color, x, y) {
-    if (!PieceType[type]) {
-      throw Error("Invalid Piece Type");
-    }
-    if (!PieceColor[color]) {
-      throw Error("Invalid Piece Color");
-    }
+var PieceSchema = new mongoose.Schema(
+  {
+    type: String,
+    color: String,
+  },
+  PieceDiscriminator
+);
 
-    this.type = type;
-    this.color = color;
-    this.x = x;
-    this.y = y;
-  }
+PieceSchema.methods.getType = () => {
+  return this.type;
+};
 
-  getType() {
-    return this.type;
-  }
+PieceSchema.methods.getColor = () => {
+  return this.color;
+};
 
-  getColor() {
-    return this.color;
-  }
+var Piece = mongoose.model("Piece", PieceSchema);
 
-  updateMove(movement) {
-    this.movement = movement;
-  }
-}
-
-module.exports = { Piece, PieceType, PieceColor };
+module.exports = {
+  Piece,
+  PieceSchema,
+  PieceType,
+  PieceColor,
+  PieceDiscriminator,
+};

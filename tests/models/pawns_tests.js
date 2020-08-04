@@ -1,12 +1,12 @@
-const { assert } = require('chai');
-const { PieceType, PieceColor } = require('../../models/pieces/pieces');
-const { Pawn } = require('../../models/pieces/pawns');
-const { TestHelpers } = require('../helpers');
+const { assert } = require("chai");
+const { PieceType, PieceColor } = require("../../models/pieces/pieces");
+const { Pawn } = require("../../models/pieces/pawns");
+const { TestHelpers } = require("../helpers");
 
-describe('Pawns model', () => {
-  describe('create operations', () => {
-    it('should successfully create a new pawn', () => {
-      let pawn = new Pawn(PieceColor.white, 4, 3);
+describe("Pawns model", () => {
+  describe("create operations", () => {
+    it("should successfully create a Pawn.initialize", () => {
+      let pawn = Pawn.initialize(PieceColor.white, 4, 3);
 
       assert.isNotNull(pawn);
       assert.equal(pawn.type, PieceType.pawn);
@@ -14,9 +14,9 @@ describe('Pawns model', () => {
     });
   });
 
-  describe('pawn movement', () => {
-    it('should test pawn movement on an empty board', () => {
-      let pawn = new Pawn(PieceColor.white, 4, 3);
+  describe("pawn movement", () => {
+    it("should test pawn movement on an empty board", () => {
+      let pawn = Pawn.initialize(PieceColor.white, 4, 3);
       let board = TestHelpers.initEmptyBoard();
       let possibleMoves = pawn.getValidMoves(board);
 
@@ -24,9 +24,9 @@ describe('Pawns model', () => {
       assert.equal(possibleMoves.length, 1);
     });
 
-    it('should be able to capture an opposing piece', () => {
-      let whitePawn = new Pawn(PieceColor.white, 3, 4);
-      let blackPawn = new Pawn(PieceColor.black, 2, 5);
+    it("should be able to capture an opposing piece", () => {
+      let whitePawn = Pawn.initialize(PieceColor.white, 3, 4);
+      let blackPawn = Pawn.initialize(PieceColor.black, 2, 5);
       let board = TestHelpers.initEmptyBoard();
       board.setPiece(whitePawn);
       board.setPiece(blackPawn);
@@ -38,9 +38,9 @@ describe('Pawns model', () => {
       assert.isTrue(validMoves.some((cell) => cell.x === 2 && cell.y === 5));
     });
 
-    it('should not be able to capture a friendly piece', () => {
-      let whitePawn = new Pawn(PieceColor.white, 3, 4);
-      let whitePawn2 = new Pawn(PieceColor.white, 4, 3);
+    it("should not be able to capture a friendly piece", () => {
+      let whitePawn = Pawn.initialize(PieceColor.white, 3, 4);
+      let whitePawn2 = Pawn.initialize(PieceColor.white, 4, 3);
       let board = TestHelpers.initEmptyBoard();
       board.setPiece(whitePawn);
       board.setPiece(whitePawn2);

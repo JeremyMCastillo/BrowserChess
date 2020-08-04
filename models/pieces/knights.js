@@ -3,7 +3,7 @@ const { Cell } = require("../cells");
 
 class Knight extends Piece {
   constructor(color, x, y) {
-    super(PieceType.knight, color, x, y);
+    super(PieceType.knight, color);
     this.x = x;
     this.y = y;
   }
@@ -17,10 +17,10 @@ class Knight extends Piece {
       if (
         board.matrix[currentX + 2][currentY - 1].piece.getColor() !== this.color
       ) {
-        validMoves.push(new Cell(currentX + 2, currentY - 1));
+        validMoves.push(Cell.initialize(currentX + 2, currentY - 1));
       }
     } else {
-      validMoves.push(new Cell(currentX + 2, currentY - 1));
+      validMoves.push(Cell.initialize(currentX + 2, currentY - 1));
     }
 
     // forward / right
@@ -28,10 +28,10 @@ class Knight extends Piece {
       if (
         board.matrix[currentX + 2][currentY + 1].piece.getColor() !== this.color
       ) {
-        validMoves.push(new Cell(currentX + 2, currentY + 1));
+        validMoves.push(Cell.initialize(currentX + 2, currentY + 1));
       }
     } else {
-      validMoves.push(new Cell(currentX + 2, currentY + 1));
+      validMoves.push(Cell.initialize(currentX + 2, currentY + 1));
     }
 
     // right / advance
@@ -39,10 +39,10 @@ class Knight extends Piece {
       if (
         board.matrix[currentX + 1][currentY + 2].piece.getColor() !== this.color
       ) {
-        validMoves.push(new Cell(currentX + 1, currentY + 2));
+        validMoves.push(Cell.initialize(currentX + 1, currentY + 2));
       }
     } else {
-      validMoves.push(new Cell(currentX + 1, currentY + 2));
+      validMoves.push(Cell.initialize(currentX + 1, currentY + 2));
     }
 
     // right /retreat
@@ -50,10 +50,10 @@ class Knight extends Piece {
       if (
         board.matrix[currentX - 1][currentY + 2].piece.getColor() !== this.color
       ) {
-        validMoves.push(new Cell(currentX - 1, currentY + 2));
+        validMoves.push(Cell.initialize(currentX - 1, currentY + 2));
       }
     } else {
-      validMoves.push(new Cell(currentX - 1, currentY + 2));
+      validMoves.push(Cell.initialize(currentX - 1, currentY + 2));
     }
 
     // back / right
@@ -61,10 +61,10 @@ class Knight extends Piece {
       if (
         board.matrix[currentX - 2][currentY + 1].piece.getColor() !== this.color
       ) {
-        validMoves.push(new Cell(currentX - 2, currentY + 1));
+        validMoves.push(Cell.initialize(currentX - 2, currentY + 1));
       }
     } else {
-      validMoves.push(new Cell(currentX - 2, currentY + 1));
+      validMoves.push(Cell.initialize(currentX - 2, currentY + 1));
     }
 
     // back / left
@@ -72,10 +72,10 @@ class Knight extends Piece {
       if (
         board.matrix[currentX - 2][currentY - 1].piece.getColor() !== this.color
       ) {
-        validMoves.push(new Cell(currentX - 2, currentY - 1));
+        validMoves.push(Cell.initialize(currentX - 2, currentY - 1));
       }
     } else {
-      validMoves.push(new Cell(currentX - 2, currentY - 1));
+      validMoves.push(Cell.initialize(currentX - 2, currentY - 1));
     }
 
     // left /advance
@@ -83,10 +83,10 @@ class Knight extends Piece {
       if (
         board.matrix[currentX + 1][currentY + 2].piece.getColor() !== this.color
       ) {
-        validMoves.push(new Cell(currentX + 1, currentY + 2));
+        validMoves.push(Cell.initialize(currentX + 1, currentY + 2));
       }
     } else {
-      validMoves.push(new Cell(currentX + 1, currentY + 2));
+      validMoves.push(Cell.initialize(currentX + 1, currentY + 2));
     }
 
     // left / retreat
@@ -94,10 +94,10 @@ class Knight extends Piece {
       if (
         board.matrix[currentX - 1][currentY - 2].piece.getColor() !== this.color
       ) {
-        validMoves.push(new Cell(currentX - 1, currentY - 2));
+        validMoves.push(Cell.initialize(currentX - 1, currentY - 2));
       }
     } else {
-      validMoves.push(new Cell(currentX - 1, currentY - 2));
+      validMoves.push(Cell.initialize(currentX - 1, currentY - 2));
     }
 
     return validMoves;
