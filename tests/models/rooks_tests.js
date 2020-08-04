@@ -1,12 +1,12 @@
-const { assert } = require('chai');
-const { PieceType, PieceColor } = require('../../models/pieces/pieces');
-const { Rook } = require('../../models/pieces/rooks');
-const { TestHelpers } = require('../helpers');
+const { assert } = require("chai");
+const { PieceType, PieceColor } = require("../../models/pieces/pieces");
+const { Rook } = require("../../models/pieces/rooks");
+const { TestHelpers } = require("../helpers");
 
-describe('Rooks model', () => {
-  describe('create operations', () => {
-    it('should successfully create a new rook', () => {
-      let rook = new Rook(PieceColor.white, 4, 3);
+describe("Rooks model", () => {
+  describe("create operations", () => {
+    it("should successfully create a Rook.initialize", () => {
+      let rook = Rook.initialize(PieceColor.white, 4, 3);
 
       assert.isNotNull(rook);
       assert.equal(rook.type, PieceType.rook);
@@ -14,9 +14,9 @@ describe('Rooks model', () => {
     });
   });
 
-  describe('rook movement', () => {
-    it('should test Rook movement on an empty board', () => {
-      let rook = new Rook(PieceColor.white, 4, 3);
+  describe("rook movement", () => {
+    it("should test Rook movement on an empty board", () => {
+      let rook = Rook.initialize(PieceColor.white, 4, 3);
       let board = TestHelpers.initEmptyBoard();
       let possibleMoves = rook.getValidMoves(board);
 
@@ -24,9 +24,9 @@ describe('Rooks model', () => {
       assert.equal(possibleMoves.length, 14);
     });
 
-    it('should be able to capture an opposing piece', () => {
-      let whiteRook = new Rook(PieceColor.white, 4, 3);
-      let blackRook = new Rook(PieceColor.black, 0, 3);
+    it("should be able to capture an opposing piece", () => {
+      let whiteRook = Rook.initialize(PieceColor.white, 4, 3);
+      let blackRook = Rook.initialize(PieceColor.black, 0, 3);
       let board = TestHelpers.initEmptyBoard();
       board.setPiece(whiteRook);
       board.setPiece(blackRook);
@@ -38,9 +38,9 @@ describe('Rooks model', () => {
       assert.isTrue(validMoves.some((cell) => cell.x === 0 && cell.y === 3));
     });
 
-    it('should not be able to capture a friendly piece', () => {
-      let whiteRook = new Rook(PieceColor.white, 4, 3);
-      let whiteRook2 = new Rook(PieceColor.white, 0, 3);
+    it("should not be able to capture a friendly piece", () => {
+      let whiteRook = Rook.initialize(PieceColor.white, 4, 3);
+      let whiteRook2 = Rook.initialize(PieceColor.white, 0, 3);
       let board = TestHelpers.initEmptyBoard();
       board.setPiece(whiteRook);
       board.setPiece(whiteRook2);

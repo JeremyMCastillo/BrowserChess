@@ -6,8 +6,8 @@ const { TestHelpers } = require("../helpers");
 
 describe("Knights model", () => {
   describe("create operations", () => {
-    it("should successfully create a new knight", () => {
-      let knight = new Knight(PieceColor.white, 4, 3);
+    it("should successfully create a Knight.initialize", () => {
+      let knight = Knight.initialize(PieceColor.white, 4, 3);
 
       assert.isNotNull(knight);
       assert.equal(knight.type, PieceType.knight);
@@ -17,7 +17,7 @@ describe("Knights model", () => {
 
   describe("Knight movement", () => {
     it("should test knight movement on an empty board", () => {
-      let knight = new Knight(PieceColor.white, 5, 5);
+      let knight = Knight.initialize(PieceColor.white, 5, 5);
       let board = TestHelpers.initEmptyBoard();
       let possibleMoves = knight.getValidMoves(board);
 
@@ -26,7 +26,7 @@ describe("Knights model", () => {
     });
 
     it("should be able to capture an opposing piece", () => {
-      let whiteKnight = new Knight(PieceColor.white, 3, 4);
+      let whiteKnight = Knight.initialize(PieceColor.white, 3, 4);
       let blackPawn = Pawn.initialize(PieceColor.black, 2, 2);
       let board = TestHelpers.initEmptyBoard();
       board.setPiece(whiteKnight);
@@ -40,7 +40,7 @@ describe("Knights model", () => {
     });
 
     it("should not be able to capture a friendly piece", () => {
-      let whiteKnight = new Knight(PieceColor.white, 3, 4);
+      let whiteKnight = Knight.initialize(PieceColor.white, 3, 4);
       let whitePawn = Pawn.initialize(PieceColor.white, 3, 1);
       let board = TestHelpers.initEmptyBoard();
       board.setPiece(whiteKnight);

@@ -6,7 +6,7 @@ const { TestHelpers } = require("../helpers");
 describe("Pawns model", () => {
   describe("create operations", () => {
     it("should successfully create a Pawn.initialize", () => {
-      let queen = new Queen(PieceColor.white, 4, 3);
+      let queen = Queen.initialize(PieceColor.white, 4, 3);
 
       assert.isNotNull(queen);
       assert.equal(queen.type, PieceType.queen);
@@ -16,7 +16,7 @@ describe("Pawns model", () => {
 
   describe("queen movement", () => {
     it("should test queen movement on an empty board", () => {
-      let queen = new Queen(PieceColor.white, 4, 3);
+      let queen = Queen.initialize(PieceColor.white, 4, 3);
       let board = TestHelpers.initEmptyBoard();
       let possibleMoves = queen.getValidMoves(board);
 
@@ -25,8 +25,8 @@ describe("Pawns model", () => {
     });
 
     it("should be able to capture an opposing diagonal piece", () => {
-      let queen = new Queen(PieceColor.white, 3, 4);
-      let queen2 = new Queen(PieceColor.black, 4, 3);
+      let queen = Queen.initialize(PieceColor.white, 3, 4);
+      let queen2 = Queen.initialize(PieceColor.black, 4, 3);
       let board = TestHelpers.initEmptyBoard();
       board.setPiece(queen);
       board.setPiece(queen2);
@@ -39,8 +39,8 @@ describe("Pawns model", () => {
     });
 
     it("should be able to capture an opposing rank piece", () => {
-      let queen = new Queen(PieceColor.white, 3, 4);
-      let queen2 = new Queen(PieceColor.black, 4, 4);
+      let queen = Queen.initialize(PieceColor.white, 3, 4);
+      let queen2 = Queen.initialize(PieceColor.black, 4, 4);
       let board = TestHelpers.initEmptyBoard();
       board.setPiece(queen);
       board.setPiece(queen2);
@@ -53,8 +53,8 @@ describe("Pawns model", () => {
     });
 
     it("should be able to capture an opposing file piece", () => {
-      let queen = new Queen(PieceColor.white, 3, 4);
-      let queen2 = new Queen(PieceColor.black, 3, 3);
+      let queen = Queen.initialize(PieceColor.white, 3, 4);
+      let queen2 = Queen.initialize(PieceColor.black, 3, 3);
       let board = TestHelpers.initEmptyBoard();
       board.setPiece(queen);
       board.setPiece(queen2);
@@ -67,8 +67,8 @@ describe("Pawns model", () => {
     });
 
     it("should not be able to capture a friendly diagonal piece", () => {
-      let queen = new Queen(PieceColor.white, 3, 4);
-      let queen2 = new Queen(PieceColor.white, 4, 3);
+      let queen = Queen.initialize(PieceColor.white, 3, 4);
+      let queen2 = Queen.initialize(PieceColor.white, 4, 3);
       let board = TestHelpers.initEmptyBoard();
       board.setPiece(queen);
       board.setPiece(queen2);
@@ -81,8 +81,8 @@ describe("Pawns model", () => {
     });
 
     it("should not be able to capture a friendly rank piece", () => {
-      let queen = new Queen(PieceColor.white, 3, 4);
-      let queen2 = new Queen(PieceColor.white, 4, 4);
+      let queen = Queen.initialize(PieceColor.white, 3, 4);
+      let queen2 = Queen.initialize(PieceColor.white, 4, 4);
       let board = TestHelpers.initEmptyBoard();
       board.setPiece(queen);
       board.setPiece(queen2);
@@ -95,8 +95,8 @@ describe("Pawns model", () => {
     });
 
     it("should not be able to capture a friendly file piece", () => {
-      let queen = new Queen(PieceColor.white, 3, 4);
-      let queen2 = new Queen(PieceColor.white, 3, 3);
+      let queen = Queen.initialize(PieceColor.white, 3, 4);
+      let queen2 = Queen.initialize(PieceColor.white, 3, 3);
       let board = TestHelpers.initEmptyBoard();
       board.setPiece(queen);
       board.setPiece(queen2);

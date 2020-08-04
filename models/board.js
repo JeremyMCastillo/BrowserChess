@@ -7,7 +7,7 @@ const {
   Bishop,
   Queen,
   King,
-  PieceColor,
+  PieceColor
 } = require("./pieces");
 
 const { mongoose } = require("../system/mongoose");
@@ -16,7 +16,7 @@ var BoardSchema = new mongoose.Schema({
   boardId: mongoose.ObjectId,
   date: {
     type: Date,
-    default: Date.now,
+    default: Date.now
   },
   game_code: String,
   // Instantiating player ID on board generation
@@ -41,7 +41,7 @@ var BoardSchema = new mongoose.Schema({
     ]
     */
   matrix: [[CellSchema]],
-  turn: String,
+  turn: String
 });
 
 BoardSchema.pre("save", function (next) {
@@ -77,14 +77,14 @@ BoardSchema.methods.populate = function () {
   this.setPiece(Pawn.initialize(PieceColor.white, 5, 1));
   this.setPiece(Pawn.initialize(PieceColor.white, 6, 1));
   this.setPiece(Pawn.initialize(PieceColor.white, 7, 1));
-  this.setPiece(new Rook(PieceColor.white, 0, 0));
-  this.setPiece(new Rook(PieceColor.white, 7, 0));
-  this.setPiece(new Knight(PieceColor.white, 1, 0));
-  this.setPiece(new Knight(PieceColor.white, 6, 0));
-  this.setPiece(new Bishop(PieceColor.white, 2, 0));
-  this.setPiece(new Bishop(PieceColor.white, 5, 0));
-  this.setPiece(new Queen(PieceColor.white, 3, 0));
-  this.setPiece(new King(PieceColor.white, 4, 0));
+  this.setPiece(Rook.initialize(PieceColor.white, 0, 0));
+  this.setPiece(Rook.initialize(PieceColor.white, 7, 0));
+  this.setPiece(Knight.initialize(PieceColor.white, 1, 0));
+  this.setPiece(Knight.initialize(PieceColor.white, 6, 0));
+  this.setPiece(Bishop.initialize(PieceColor.white, 2, 0));
+  this.setPiece(Bishop.initialize(PieceColor.white, 5, 0));
+  this.setPiece(Queen.initialize(PieceColor.white, 3, 0));
+  this.setPiece(King.initialize(PieceColor.white, 4, 0));
 
   this.setPiece(Pawn.initialize(PieceColor.black, 0, 6));
   this.setPiece(Pawn.initialize(PieceColor.black, 1, 6));
@@ -94,14 +94,14 @@ BoardSchema.methods.populate = function () {
   this.setPiece(Pawn.initialize(PieceColor.black, 5, 6));
   this.setPiece(Pawn.initialize(PieceColor.black, 6, 6));
   this.setPiece(Pawn.initialize(PieceColor.black, 7, 6));
-  this.setPiece(new Rook(PieceColor.black, 0, 7));
-  this.setPiece(new Rook(PieceColor.black, 7, 7));
-  this.setPiece(new Knight(PieceColor.black, 1, 7));
-  this.setPiece(new Knight(PieceColor.black, 6, 7));
-  this.setPiece(new Bishop(PieceColor.black, 2, 7));
-  this.setPiece(new Bishop(PieceColor.black, 5, 7));
-  this.setPiece(new Queen(PieceColor.black, 3, 7));
-  this.setPiece(new King(PieceColor.black, 4, 7));
+  this.setPiece(Rook.initialize(PieceColor.black, 0, 7));
+  this.setPiece(Rook.initialize(PieceColor.black, 7, 7));
+  this.setPiece(Knight.initialize(PieceColor.black, 1, 7));
+  this.setPiece(Knight.initialize(PieceColor.black, 6, 7));
+  this.setPiece(Bishop.initialize(PieceColor.black, 2, 7));
+  this.setPiece(Bishop.initialize(PieceColor.black, 5, 7));
+  this.setPiece(Queen.initialize(PieceColor.black, 3, 7));
+  this.setPiece(King.initialize(PieceColor.black, 4, 7));
 };
 
 BoardSchema.methods.toJson = function () {

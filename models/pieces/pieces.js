@@ -8,18 +8,20 @@ const PieceType = {
   knight: "knight",
   bishop: "bishop",
   king: "king",
-  queen: "queen",
+  queen: "queen"
 };
 
 const PieceColor = {
   white: "white",
-  black: "black",
+  black: "black"
 };
 
 var PieceSchema = new mongoose.Schema(
   {
     type: String,
     color: String,
+    x: Number,
+    y: Number
   },
   PieceDiscriminator
 );
@@ -39,5 +41,5 @@ module.exports = {
   PieceSchema,
   PieceType,
   PieceColor,
-  PieceDiscriminator,
+  PieceDiscriminator
 };

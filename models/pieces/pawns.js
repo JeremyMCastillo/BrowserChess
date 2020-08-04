@@ -3,7 +3,7 @@ const {
   Piece,
   PieceType,
   PieceColor,
-  PieceDiscriminator,
+  PieceDiscriminator
 } = require("./pieces");
 const { Cell } = require("../cells");
 

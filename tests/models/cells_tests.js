@@ -24,14 +24,14 @@ describe("initialize player pieces", () => {
     let whitePawn6 = Pawn.initialize(PieceColor.white, 5, 1);
     let whitePawn7 = Pawn.initialize(PieceColor.white, 6, 1);
     let whitePawn8 = Pawn.initialize(PieceColor.white, 7, 1);
-    let whiteRook1 = new Rook(PieceColor.white, 0, 0);
-    let whiteRook2 = new Rook(PieceColor.white, 7, 0);
-    let whiteKnight1 = new Knight(PieceColor.white, 1, 0);
-    let whiteKnight2 = new Knight(PieceColor.white, 6, 0);
-    let whiteBishop1 = new Bishop(PieceColor.white, 2, 0);
-    let whiteBishop2 = new Bishop(PieceColor.white, 5, 0);
-    let whiteQueen = new Queen(PieceColor.white, 3, 0);
-    let whiteKing = new King(PieceColor.white, 4, 0);
+    let whiteRook1 = Rook.initialize(PieceColor.white, 0, 0);
+    let whiteRook2 = Rook.initialize(PieceColor.white, 7, 0);
+    let whiteKnight1 = Knight.initialize(PieceColor.white, 1, 0);
+    let whiteKnight2 = Knight.initialize(PieceColor.white, 6, 0);
+    let whiteBishop1 = Bishop.initialize(PieceColor.white, 2, 0);
+    let whiteBishop2 = Bishop.initialize(PieceColor.white, 5, 0);
+    let whiteQueen = Queen.initialize(PieceColor.white, 3, 0);
+    let whiteKing = King.initialize(PieceColor.white, 4, 0);
 
     board.setPiece(whitePawn1);
     board.setPiece(whitePawn2);
@@ -68,14 +68,14 @@ describe("initialize player pieces", () => {
     let blackPawn6 = Pawn.initialize(PieceColor.black, 5, 6);
     let blackPawn7 = Pawn.initialize(PieceColor.black, 6, 6);
     let blackPawn8 = Pawn.initialize(PieceColor.black, 7, 6);
-    let blackRook1 = new Rook(PieceColor.black, 0, 7);
-    let blackRook2 = new Rook(PieceColor.black, 7, 7);
-    let blackKnight1 = new Knight(PieceColor.black, 7, 1);
-    let blackKnight2 = new Knight(PieceColor.black, 7, 6);
-    let blackBishop1 = new Bishop(PieceColor.black, 7, 2);
-    let blackBishop2 = new Bishop(PieceColor.black, 7, 5);
-    let blackQueen = new Queen(PieceColor.black, 7, 3);
-    let blackKing = new King(PieceColor.black, 7, 4);
+    let blackRook1 = Rook.initialize(PieceColor.black, 0, 7);
+    let blackRook2 = Rook.initialize(PieceColor.black, 7, 7);
+    let blackKnight1 = Knight.initialize(PieceColor.black, 7, 1);
+    let blackKnight2 = Knight.initialize(PieceColor.black, 7, 6);
+    let blackBishop1 = Bishop.initialize(PieceColor.black, 7, 2);
+    let blackBishop2 = Bishop.initialize(PieceColor.black, 7, 5);
+    let blackQueen = Queen.initialize(PieceColor.black, 7, 3);
+    let blackKing = King.initialize(PieceColor.black, 7, 4);
 
     board.setPiece(blackPawn1);
     board.setPiece(blackPawn2);

@@ -1,12 +1,12 @@
-const { assert } = require('chai');
-const { PieceType, PieceColor } = require('../../models/pieces/pieces');
-const { Bishop } = require('../../models/pieces/bishops');
-const { TestHelpers } = require('../helpers');
+const { assert } = require("chai");
+const { PieceType, PieceColor } = require("../../models/pieces/pieces");
+const { Bishop } = require("../../models/pieces/bishops");
+const { TestHelpers } = require("../helpers");
 
-describe('Bishops model', () => {
-  describe('create operations', () => {
-    it('should successfully create a new bishop', () => {
-      let bishop = new Bishop(PieceColor.white, 4, 3);
+describe("Bishops model", () => {
+  describe("create operations", () => {
+    it("should successfully create a Bishop.initialize", () => {
+      let bishop = Bishop.initialize(PieceColor.white, 4, 3);
 
       assert.isNotNull(bishop);
       assert.equal(bishop.type, PieceType.bishop);
@@ -14,9 +14,9 @@ describe('Bishops model', () => {
     });
   });
 
-  describe('bishop movement', () => {
-    it('should test bishop movement on an empty board', () => {
-      let bishop = new Bishop(PieceColor.white, 4, 3);
+  describe("bishop movement", () => {
+    it("should test bishop movement on an empty board", () => {
+      let bishop = Bishop.initialize(PieceColor.white, 4, 3);
       let board = TestHelpers.initEmptyBoard();
       let possibleMoves = bishop.getValidMoves(board);
 
@@ -24,9 +24,9 @@ describe('Bishops model', () => {
       assert.equal(possibleMoves.length, 13);
     });
 
-    it('should be able to capture an opposing piece', () => {
-      let bishop = new Bishop(PieceColor.white, 3, 4);
-      let bishop2 = new Bishop(PieceColor.black, 4, 3);
+    it("should be able to capture an opposing piece", () => {
+      let bishop = Bishop.initialize(PieceColor.white, 3, 4);
+      let bishop2 = Bishop.initialize(PieceColor.black, 4, 3);
       let board = TestHelpers.initEmptyBoard();
       board.setPiece(bishop);
       board.setPiece(bishop2);
@@ -38,9 +38,9 @@ describe('Bishops model', () => {
       assert.isTrue(validMoves.some((cell) => cell.x === 4 && cell.y === 3));
     });
 
-    it('should not be able to capture a friendly piece', () => {
-      let bishop = new Bishop(PieceColor.white, 3, 4);
-      let bishop2 = new Bishop(PieceColor.white, 4, 3);
+    it("should not be able to capture a friendly piece", () => {
+      let bishop = Bishop.initialize(PieceColor.white, 3, 4);
+      let bishop2 = Bishop.initialize(PieceColor.white, 4, 3);
       let board = TestHelpers.initEmptyBoard();
       board.setPiece(bishop);
       board.setPiece(bishop2);
