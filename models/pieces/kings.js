@@ -13,7 +13,7 @@ KingSchema.statics.initialize = (color, x, y) => {
   return king;
 };
 
-KingSchema.methods.getValidMoves = (board) => {
+KingSchema.methods.getValidMoves = function (board) {
   // TODO: Change this to only add the space if it wouldn't put the king in check
   let currentX = this.x;
   let currentY = this.y;

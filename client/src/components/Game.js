@@ -27,11 +27,20 @@ const Game = (props) => {
       console.log("Got piece moved callback");
       props.loadBoard(gameCode);
     });
+    socket.on("validMoves", ({ validMoves }) => {
+      console.log("validMoves");
+      console.log(validMoves);
+    });
   }, [socket]);
 
   const movePiece = (piece, cell) => {
     console.log("Sending piece move call.");
     socket.emit("movePiece", { gameCode: gameCode, piece, cell });
+  };
+
+  const selectPiece = (piece) => {
+    console.log("Sending select piece call.");
+    socket.emit("pieceSelected", { gameCode, piece });
   };
 
   console.log(gameCode);
@@ -47,7 +56,10 @@ const Game = (props) => {
           <Player board={props.board} player={props.board.player_1} />
         </div>
         <div className="column">
-          <Board movePieceCallback={movePiece} />
+          <Board
+            selectPieceCallback={selectPiece}
+            movePieceCallback={movePiece}
+          />
         </div>
         <div className="column is-one-fifth">
           <Player board={props.board} player={props.board.player_2} />
@@ -64,5 +76,5 @@ const mapStateToProps = (state) => {
 };
 
 export default connect(mapStateToProps, {
-  loadBoard,
+  loadBoard
 })(Game);

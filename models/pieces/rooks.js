@@ -14,7 +14,7 @@ RookSchema.statics.initialize = (color, x, y) => {
   return rook;
 };
 
-RookSchema.methods.getValidMoves = (board) => {
+RookSchema.methods.getValidMoves = function (board) {
   let currentX = this.x;
   let currentY = this.y;
   let validMoves = [];

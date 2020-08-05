@@ -13,7 +13,7 @@ BishopSchema.statics.initialize = (color, x, y) => {
   return bishop;
 };
 
-BishopSchema.methods.getValidMoves = (board) => {
+BishopSchema.methods.getValidMoves = function (board) {
   let currentX = this.x;
   let currentY = this.y;
   let validMoves = [];

@@ -19,7 +19,8 @@ PawnSchema.statics.initialize = (color, x, y) => {
   return pawn;
 };
 
-PawnSchema.methods.getValidMoves = (board) => {
+PawnSchema.methods.getValidMoves = function (board) {
+  console.log(this);
   let currentX = this.x;
   let currentY = this.y;
   let validMoves = [];

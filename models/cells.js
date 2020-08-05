@@ -1,10 +1,10 @@
 const { mongoose } = require("../system/mongoose");
-const { PieceSchema } = require("./pieces");
+const { PieceSchema } = require("./pieces/pieces");
 
 var CellSchema = new mongoose.Schema({
   x: Number,
   y: Number,
-  piece: PieceSchema,
+  piece: PieceSchema
 });
 
 CellSchema.statics.initialize = (x, y) => {
@@ -15,7 +15,7 @@ CellSchema.statics.initialize = (x, y) => {
   return cell;
 };
 
-CellSchema.methods.setPiece = (piece) => {
+CellSchema.methods.setPiece = function (piece) {
   this.piece = piece;
 };
 
