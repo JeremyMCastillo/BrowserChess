@@ -22,13 +22,13 @@ BishopSchema.methods.getValidMoves = function (board) {
 
   // Moves down and left
   while (i >= 0 && j >= 0) {
-    if (board.hasPieceAt(i, j)) {
-      if (board.matrix[i][j].piece.getColor() !== this.color) {
-        validMoves.push(Cell.initialize(i, j));
-      }
-      break;
-    } else {
+    if (board.canMovePieceTo(this, i, j)) {
       validMoves.push(Cell.initialize(i, j));
+      if (board.matrix[i][j].piece !== null) {
+        break;
+      }
+    } else {
+      break;
     }
     i -= 1;
     j -= 1;
@@ -38,13 +38,13 @@ BishopSchema.methods.getValidMoves = function (board) {
   i = currentX - 1;
   j = currentY + 1;
   while (i >= 0 && j < 8) {
-    if (board.hasPieceAt(i, j)) {
-      if (board.matrix[i][j].piece.getColor() !== this.color) {
-        validMoves.push(Cell.initialize(i, j));
-      }
-      break;
-    } else {
+    if (board.canMovePieceTo(this, i, j)) {
       validMoves.push(Cell.initialize(i, j));
+      if (board.matrix[i][j].piece !== null) {
+        break;
+      }
+    } else {
+      break;
     }
     i -= 1;
     j += 1;
@@ -54,13 +54,13 @@ BishopSchema.methods.getValidMoves = function (board) {
   i = currentX + 1;
   j = currentY + 1;
   while (i < 8 && j < 8) {
-    if (board.hasPieceAt(i, j)) {
-      if (board.matrix[i][j].piece.getColor() !== this.color) {
-        validMoves.push(Cell.initialize(i, j));
-      }
-      break;
-    } else {
+    if (board.canMovePieceTo(this, i, j)) {
       validMoves.push(Cell.initialize(i, j));
+      if (board.matrix[i][j].piece !== null) {
+        break;
+      }
+    } else {
+      break;
     }
     i += 1;
     j += 1;
@@ -70,13 +70,13 @@ BishopSchema.methods.getValidMoves = function (board) {
   i = currentX + 1;
   j = currentY - 1;
   while (i < 8 && j >= 0) {
-    if (board.hasPieceAt(i, j)) {
-      if (board.matrix[i][j].piece.getColor() !== this.color) {
-        validMoves.push(Cell.initialize(i, j));
-      }
-      break;
-    } else {
+    if (board.canMovePieceTo(this, i, j)) {
       validMoves.push(Cell.initialize(i, j));
+      if (board.matrix[i][j].piece !== null) {
+        break;
+      }
+    } else {
+      break;
     }
     i += 1;
     j -= 1;

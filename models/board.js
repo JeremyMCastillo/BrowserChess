@@ -117,6 +117,26 @@ BoardSchema.methods.hasPieceAt = function (x, y) {
   return this.matrix[x][y].piece !== null;
 };
 
+BoardSchema.methods.canMovePieceTo = function (piece, x, y) {
+  if (x < 0 || x > 7) {
+    return false;
+  }
+
+  if (y < 0 || y > 7) {
+    return false;
+  }
+
+  if (this.matrix[x][y].piece === null) {
+    return true;
+  }
+
+  if (this.matrix[x][y].piece.color === piece.color) {
+    return false;
+  }
+
+  return true;
+};
+
 // Places piece on the board based on the pieces x and y properties
 BoardSchema.methods.setPiece = function (piece) {
   this.matrix[piece.x][piece.y].piece = piece;

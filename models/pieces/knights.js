@@ -18,90 +18,42 @@ KnightSchema.methods.getValidMoves = function (board) {
   let currentY = this.y;
   let validMoves = [];
   // forward / left
-  if (board.hasPieceAt(currentX + 2, currentY - 1)) {
-    if (
-      board.matrix[currentX + 2][currentY - 1].piece.getColor() !== this.color
-    ) {
-      validMoves.push(Cell.initialize(currentX + 2, currentY - 1));
-    }
-  } else {
+  if (board.canMovePieceTo(this, currentX + 2, currentY - 1)) {
     validMoves.push(Cell.initialize(currentX + 2, currentY - 1));
   }
 
   // forward / right
-  if (board.hasPieceAt(currentX + 2, currentY + 1)) {
-    if (
-      board.matrix[currentX + 2][currentY + 1].piece.getColor() !== this.color
-    ) {
-      validMoves.push(Cell.initialize(currentX + 2, currentY + 1));
-    }
-  } else {
+  if (board.canMovePieceTo(this, currentX + 2, currentY + 1)) {
     validMoves.push(Cell.initialize(currentX + 2, currentY + 1));
   }
 
   // right / advance
-  if (board.hasPieceAt(currentX + 1, currentY + 2)) {
-    if (
-      board.matrix[currentX + 1][currentY + 2].piece.getColor() !== this.color
-    ) {
-      validMoves.push(Cell.initialize(currentX + 1, currentY + 2));
-    }
-  } else {
+  if (board.canMovePieceTo(this, currentX + 1, currentY + 2)) {
     validMoves.push(Cell.initialize(currentX + 1, currentY + 2));
   }
 
   // right /retreat
-  if (board.hasPieceAt(currentX - 1, currentY + 2)) {
-    if (
-      board.matrix[currentX - 1][currentY + 2].piece.getColor() !== this.color
-    ) {
-      validMoves.push(Cell.initialize(currentX - 1, currentY + 2));
-    }
-  } else {
+  if (board.canMovePieceTo(this, currentX - 1, currentY + 2)) {
     validMoves.push(Cell.initialize(currentX - 1, currentY + 2));
   }
 
   // back / right
-  if (board.hasPieceAt(currentX - 2, currentY + 1)) {
-    if (
-      board.matrix[currentX - 2][currentY + 1].piece.getColor() !== this.color
-    ) {
-      validMoves.push(Cell.initialize(currentX - 2, currentY + 1));
-    }
-  } else {
+  if (board.canMovePieceTo(this, currentX - 2, currentY + 1)) {
     validMoves.push(Cell.initialize(currentX - 2, currentY + 1));
   }
 
   // back / left
-  if (board.hasPieceAt(currentX - 2, currentY - 1)) {
-    if (
-      board.matrix[currentX - 2][currentY - 1].piece.getColor() !== this.color
-    ) {
-      validMoves.push(Cell.initialize(currentX - 2, currentY - 1));
-    }
-  } else {
+  if (board.canMovePieceTo(this, currentX - 2, currentY - 1)) {
     validMoves.push(Cell.initialize(currentX - 2, currentY - 1));
   }
 
   // left /advance
-  if (board.hasPieceAt(currentX + 1, currentY + 2)) {
-    if (
-      board.matrix[currentX + 1][currentY + 2].piece.getColor() !== this.color
-    ) {
-      validMoves.push(Cell.initialize(currentX + 1, currentY + 2));
-    }
-  } else {
+  if (board.canMovePieceTo(this, currentX + 1, currentY + 2)) {
     validMoves.push(Cell.initialize(currentX + 1, currentY + 2));
   }
 
   // left / retreat
-  if (board.hasPieceAt(currentX - 1, currentY - 2)) {
-    if (
-      board.matrix[currentX - 1][currentY - 2].piece.getColor() !== this.color
-    ) {
-      validMoves.push(Cell.initialize(currentX - 1, currentY - 2));
-    }
-  } else {
+  if (board.canMovePieceTo(this, currentX - 1, currentY - 2)) {
     validMoves.push(Cell.initialize(currentX - 1, currentY - 2));
   }
 

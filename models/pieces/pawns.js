@@ -28,25 +28,22 @@ PawnSchema.methods.getValidMoves = function (board) {
   // TODO: Implement "First Move" where pawn can jump two spaces on first move.
 
   // logic for move
-  if (!board.hasPieceAt(currentX, currentY + direction)) {
+  if (
+    board.canMovePieceTo(this, currentX, currentY + direction) &&
+    !board.hasPieceAt(currentX, currentY + direction)
+  ) {
     validMoves.push(Cell.initialize(currentX, currentY + direction));
   }
 
   // when capturing a piece we can change files
-  if (currentX < 8 && board.hasPieceAt(currentX + 1, currentY + direction)) {
-    if (
-      board.matrix[currentX + 1][currentY + direction].piece.getColor() !==
-      this.color
-    ) {
+  if (board.canMovePieceTo(this, currentX + 1, currentY + direction)) {
+    if (board.matrix[currentX + 1][currentY + direction].piece) {
       // when capturing a piece we can change files
       validMoves.push(Cell.initialize(currentX + 1, currentY + direction));
     }
   }
-  if (currentX > 1 && board.hasPieceAt(currentX - 1, currentY + direction)) {
-    if (
-      board.matrix[currentX - 1][currentY + direction].piece.getColor() !==
-      this.color
-    ) {
+  if (board.canMovePieceTo(this, currentX - 1, currentY + direction)) {
+    if (board.matrix[currentX - 1][currentY + direction].piece) {
       // when capturing a piece we can change files
       validMoves.push(Cell.initialize(currentX - 1, currentY + direction));
     }

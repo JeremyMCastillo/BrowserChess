@@ -21,46 +21,46 @@ RookSchema.methods.getValidMoves = function (board) {
   let i = 0;
 
   for (i = currentX - 1; i >= 0; i -= 1) {
-    if (board.hasPieceAt(i, currentY)) {
-      if (board.matrix[i][currentY].piece.getColor() !== this.color) {
-        validMoves.push(Cell.initialize(i, currentY));
-      }
-      break;
-    } else {
+    if (board.canMovePieceTo(this, i, currentY)) {
       validMoves.push(Cell.initialize(i, currentY));
+      if (board.matrix[i][currentY].piece !== null) {
+        break;
+      }
+    } else {
+      break;
     }
   }
 
   for (i = currentX + 1; i < 8; i += 1) {
-    if (board.hasPieceAt(i, currentY)) {
-      if (board.matrix[i][currentY].piece.getColor() !== this.color) {
-        validMoves.push(Cell.initialize(i, currentY));
-      }
-      break;
-    } else {
+    if (board.canMovePieceTo(this, i, currentY)) {
       validMoves.push(Cell.initialize(i, currentY));
+      if (board.matrix[i][currentY].piece !== null) {
+        break;
+      }
+    } else {
+      break;
     }
   }
 
   for (i = currentY - 1; i >= 0; i -= 1) {
-    if (board.hasPieceAt(currentX, i)) {
-      if (board.matrix[currentX][i].piece.getColor() !== this.color) {
-        validMoves.push(Cell.initialize(currentX, i));
-      }
-      break;
-    } else {
+    if (board.canMovePieceTo(this, currentX, i)) {
       validMoves.push(Cell.initialize(currentX, i));
+      if (board.matrix[currentX][i].piece !== null) {
+        break;
+      }
+    } else {
+      break;
     }
   }
 
   for (i = currentY + 1; i < 8; i += 1) {
-    if (board.hasPieceAt(currentY, i)) {
-      if (board.matrix[currentY][i].piece.getColor() !== this.color) {
-        validMoves.push(Cell.initialize(currentY, i));
+    if (board.canMovePieceTo(this, currentX, i)) {
+      validMoves.push(Cell.initialize(currentX, i));
+      if (board.matrix[currentX][i].piece !== null) {
+        break;
       }
-      break;
     } else {
-      validMoves.push(Cell.initialize(currentY, i));
+      break;
     }
   }
 

@@ -21,84 +21,45 @@ KingSchema.methods.getValidMoves = function (board) {
   // basic logic for movement, since the king can only capture in specific ways this
   // is basic for all cardinal directions and diagonals for now
   // one space forward
-  if (board.hasPieceAt(currentX + 1, currentY)) {
-    if (board.matrix[currentX + 1][currentY].piece.getColor() !== this.color) {
-      validMoves.push(Cell.initialize(currentX + 1, currentY));
-    }
-  } else {
+  if (board.canMovePieceTo(this, currentX + 1, currentY)) {
     validMoves.push(Cell.initialize(currentX + 1, currentY));
   }
 
   // one space diagonal left forward
-  if (board.hasPieceAt(currentX + 1, currentY - 1)) {
-    if (
-      board.matrix[currentX + 1][currentY + 1].piece.getColor() !== this.color
-    ) {
-      validMoves.push(Cell.initialize(currentX + 1, currentY - 1));
-    }
-  } else {
+  if (board.canMovePieceTo(this, currentX + 1, currentY - 1)) {
     validMoves.push(Cell.initialize(currentX + 1, currentY - 1));
   }
 
   // one space diagonal right forward
-  if (board.hasPieceAt(currentX + 1, currentY + 1)) {
-    if (
-      board.matrix[currentX + 1][currentY + 1].piece.getColor() !== this.color
-    ) {
-      validMoves.push(Cell.initialize(currentX + 1, currentY + 1));
-    }
-  } else {
+  if (board.canMovePieceTo(this, currentX + 1, currentY + 1)) {
     validMoves.push(Cell.initialize(currentX + 1, currentY + 1));
   }
 
   // one space backward
-  if (board.hasPieceAt(currentX - 1, currentY)) {
-    if (board.matrix[currentX + 1][currentY].piece.getColor() !== this.color) {
-      validMoves.push(Cell.initialize(currentX - 1, currentY));
-    }
-  } else {
+  if (board.canMovePieceTo(this, currentX - 1, currentY)) {
     validMoves.push(Cell.initialize(currentX - 1, currentY));
   }
 
   // one space diagonal left backward
-  if (board.hasPieceAt(currentX - 1, currentY - 1)) {
-    if (
-      board.matrix[currentX - 1][currentY - 1].piece.getColor() !== this.color
-    ) {
-      validMoves.push(Cell.initialize(currentX - 1, currentY - 1));
-    }
-  } else {
+  if (board.canMovePieceTo(this, currentX - 1, currentY - 1)) {
     validMoves.push(Cell.initialize(currentX - 1, currentY - 1));
   }
 
   // one space diagonal right backward
-  if (board.hasPieceAt(currentX - 1, currentY + 1)) {
-    if (
-      board.matrix[currentX - 1][currentY + 1].piece.getColor() !== this.color
-    ) {
-      validMoves.push(Cell.initialize(currentX - 1, currentY + 1));
-    }
-  } else {
+  if (board.canMovePieceTo(this, currentX - 1, currentY + 1)) {
     validMoves.push(Cell.initialize(currentX - 1, currentY + 1));
   }
 
   // one space right
-  if (board.hasPieceAt(currentX, currentY + 1)) {
-    if (board.matrix[currentX][currentY + 1].piece.getColor() !== this.color) {
-      validMoves.push(Cell.initialize(currentX, currentY + 1));
-    }
-  } else {
+  if (board.canMovePieceTo(this, currentX, currentY + 1)) {
     validMoves.push(Cell.initialize(currentX, currentY + 1));
   }
 
   // one space left
-  if (board.hasPieceAt(currentX, currentY - 1)) {
-    if (board.matrix[currentX][currentY - 1].piece.getColor() !== this.color) {
-      validMoves.push(Cell.initialize(currentX, currentY - 1));
-    }
-  } else {
+  if (board.canMovePieceTo(this, currentX, currentY - 1)) {
     validMoves.push(Cell.initialize(currentX, currentY - 1));
   }
+
   return validMoves;
 };
 
