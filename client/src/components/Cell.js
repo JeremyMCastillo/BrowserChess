@@ -4,6 +4,16 @@ import "../index.css";
 import { selectPiece } from "../actions/GameActions";
 
 const Cell = (props) => {
+  let valid = false;
+
+  if (
+    props.validMoves.find(
+      (move) => move.x === props.cell.x && move.y === props.cell.y
+    )
+  ) {
+    valid = true;
+  }
+
   const onCellClick = (e) => {
     e.preventDefault();
 
@@ -17,18 +27,38 @@ const Cell = (props) => {
     }
 
     // First click selects a piece, second click selects the cell to move to.
-    if (!props.selectedPiece.type && props.cell.piece.type) {
-      console.log("Alright! Selecting a piece!");
-      let selectedPiece = props.cell.piece ? props.cell.piece : {};
+    if (!props.selectedPiece.type) {
+      if (props.cell.piece) {
+        if (props.cell.piece.color === props.player.color) {
+          console.log("Alright! Selecting a piece!");
+          let selectedPiece = props.cell.piece ? props.cell.piece : {};
 
-      props.selectPieceCallback(selectedPiece);
-      props.selectPiece(selectedPiece);
-    } else if (props.selectedPiece.type) {
-      console.log("Woohoo gonna move that piece!");
+          props.selectPieceCallback(selectedPiece);
+          props.selectPiece(selectedPiece);
+        } else {
+          alert(
+            "You don't expect to be able to move your opponent's pieces, do you?"
+          );
+        }
+      } else {
+        alert("Try clicking on one of your pieces to move it around.");
+      }
+    } else {
+      if (props.cell.piece && props.cell.piece.color === props.player.color) {
+        console.log("Alright, you decided to change your mind, and that's OK!");
+        let selectedPiece = props.cell.piece ? props.cell.piece : {};
 
-      props.movePieceCallback(props.selectedPiece, props.cell);
-      // Clear selected piece
-      props.selectPiece({});
+        props.selectPieceCallback(selectedPiece);
+        props.selectPiece(selectedPiece);
+      } else if (valid) {
+        console.log("Woohoo gonna move that piece!");
+
+        props.movePieceCallback(props.selectedPiece, props.cell);
+        // Clear selected piece
+        props.selectPiece({});
+      } else {
+        alert("I hate to be THAT GUY, but there are rules, you know.");
+      }
     }
   };
 
@@ -41,16 +71,18 @@ const Cell = (props) => {
 
   return (
     <button
-      className={`square piece column ${pieceType} ${pieceColor}`}
+      className={`square piece column${
+        valid ? " valid" : ""
+      } ${pieceType} ${pieceColor}`}
       onClick={onCellClick}
     ></button>
   );
 };
 
 const mapStateToProps = (state) => {
-  let { selectedPiece } = state.gameState;
+  let { selectedPiece, validMoves } = state.gameState;
 
-  return { selectedPiece };
+  return { selectedPiece, validMoves };
 };
 
 export default connect(mapStateToProps, {

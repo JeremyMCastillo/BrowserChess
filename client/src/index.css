@@ -21,11 +21,17 @@ code {
 }
 
 #board .columns:nth-child(even) .square.column:nth-child(even) {
-  background-color: forestgreen;
+  background-color: #979ec5;
 }
 
 #board .columns:nth-child(odd) .square.column:nth-child(odd) {
-  background-color: forestgreen;
+  background-color: #979ec5;
+}
+
+#board .columns .square.column.valid {
+  background-color: #a6e4a6 !important;
+  box-shadow: inset 0px 0px 0px 1px #979ec5;
+  box-sizing: border-box;
 }
 
 #board .column {

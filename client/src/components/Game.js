@@ -6,6 +6,7 @@ import "../index.css";
 import Board from "./Board";
 import Player from "./Player";
 import { loadBoard } from "../actions/LandingActions";
+import { registerValidMoves } from "../actions/GameActions";
 const socket = openSocket("/");
 
 const Game = (props) => {
@@ -25,11 +26,13 @@ const Game = (props) => {
     });
     socket.on("pieceMoved", () => {
       console.log("Got piece moved callback");
+      props.registerValidMoves([]);
       props.loadBoard(gameCode);
     });
     socket.on("validMoves", ({ validMoves }) => {
       console.log("validMoves");
       console.log(validMoves);
+      props.registerValidMoves(validMoves);
     });
   }, [socket]);
 
@@ -76,5 +79,6 @@ const mapStateToProps = (state) => {
 };
 
 export default connect(mapStateToProps, {
-  loadBoard
+  loadBoard,
+  registerValidMoves
 })(Game);

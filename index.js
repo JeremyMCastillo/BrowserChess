@@ -71,7 +71,7 @@ fs.readdir(modelsDir, (err, files) => {
 
           console.log("Sending response back to room.");
           console.log(validMoves);
-          io.sockets.in(gameCode).emit("validMoves", { validMoves });
+          socket.emit("validMoves", { validMoves });
         }
       });
     });
