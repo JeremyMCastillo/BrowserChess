@@ -75,7 +75,7 @@ code {
 }
 
 #board .square.piece.rook.black {
-  background-image: url("./images/pawn\ black.svg");
+  background-image: url("./images/rook\ black.svg");
 }
 
 #board .square.piece.knight.black {

@@ -34,7 +34,6 @@ const Cell = (props) => {
           let selectedPiece = props.cell.piece ? props.cell.piece : {};
 
           props.selectPieceCallback(selectedPiece);
-          props.selectPiece(selectedPiece);
         } else {
           alert(
             "You don't expect to be able to move your opponent's pieces, do you?"
@@ -49,7 +48,6 @@ const Cell = (props) => {
         let selectedPiece = props.cell.piece ? props.cell.piece : {};
 
         props.selectPieceCallback(selectedPiece);
-        props.selectPiece(selectedPiece);
       } else if (valid) {
         console.log("Woohoo gonna move that piece!");
 
