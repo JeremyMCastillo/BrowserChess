@@ -1,15 +1,15 @@
-const { assert } = require('chai');
-const { Board } = require('../../models/board');
-const { Player } = require('../../models/players');
+const { assert } = require("chai");
+const { Board } = require("../../models/board");
+const { Player } = require("../../models/players");
 
-describe('Boards model', () => {
-  describe('create operations', () => {
-    it('should successfully create a new board', () => {
+describe("Boards model", () => {
+  describe("create operations", () => {
+    it("should successfully create a new board", () => {
       let board = new Board();
       assert.isNotNull(board);
     });
 
-    it('should initialze a board with an empty matrix, with x and y in the right order', () => {
+    it("should initialze a board with an empty matrix, with x and y in the right order", () => {
       let board = new Board();
       board.init();
 
@@ -19,9 +19,9 @@ describe('Boards model', () => {
       assert.equal(board.matrix[2][3].y, 3);
     });
 
-    it('should save a new board to the database', (done) => {
+    it("should save a new board to the database", (done) => {
       let board = new Board();
-      let player = new Player('test');
+      let player = Player.initialize("test");
       board.player_1 = player;
       board
         .generateBoardId()
