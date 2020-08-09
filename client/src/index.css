@@ -67,7 +67,7 @@ code {
 }
 
 #board .square.piece.king.white {
-  background-image: url("./images/knight\ white.svg");
+  background-image: url("./images/king\ white.svg");
 }
 
 #board .square.piece.pawn.black {

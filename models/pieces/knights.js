@@ -48,8 +48,8 @@ KnightSchema.methods.getValidMoves = function (board) {
   }
 
   // left /advance
-  if (board.canMovePieceTo(this, currentX + 1, currentY + 2)) {
-    validMoves.push(Cell.initialize(currentX + 1, currentY + 2));
+  if (board.canMovePieceTo(this, currentX + 1, currentY - 2)) {
+    validMoves.push(Cell.initialize(currentX + 1, currentY - 2));
   }
 
   // left / retreat

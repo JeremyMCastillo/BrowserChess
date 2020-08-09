@@ -1,7 +1,7 @@
 import React from "react";
 import { connect } from "react-redux";
 import "../index.css";
-import { selectPiece } from "../actions/GameActions";
+import { selectPiece, registerValidMoves } from "../actions/GameActions";
 
 const Cell = (props) => {
   let valid = false;
@@ -44,10 +44,21 @@ const Cell = (props) => {
       }
     } else {
       if (props.cell.piece && props.cell.piece.color === props.player.color) {
-        console.log("Alright, you decided to change your mind, and that's OK!");
-        let selectedPiece = props.cell.piece ? props.cell.piece : {};
+        if (
+          props.cell.piece.x == props.selectedPiece.x &&
+          props.cell.piece.y == props.selectedPiece.y
+        ) {
+          console.log("Deselecting the piece!");
+          props.selectPiece({});
+          props.registerValidMoves([]);
+        } else {
+          console.log(
+            "Alright, you decided to change your mind, and that's OK!"
+          );
+          let selectedPiece = props.cell.piece ? props.cell.piece : {};
 
-        props.selectPieceCallback(selectedPiece);
+          props.selectPieceCallback(selectedPiece);
+        }
       } else if (valid) {
         console.log("Woohoo gonna move that piece!");
 
@@ -84,5 +95,6 @@ const mapStateToProps = (state) => {
 };
 
 export default connect(mapStateToProps, {
-  selectPiece
+  selectPiece,
+  registerValidMoves
 })(Cell);
