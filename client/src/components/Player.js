@@ -1,5 +1,6 @@
 import React from "react";
 import { Typography, Card } from "@material-ui/core";
+import { Graveyard } from "./Graveyard";
 
 const Player = (props) => {
   const playerName = props.player ? props.player.name : "No Player";
@@ -26,8 +27,11 @@ const Player = (props) => {
             className="card-header-title has-text-centered is-block"
           >
             {playerName}
-            <Typography variant="subtitle1">{turnMessage}</Typography>
           </Typography>
+          <Typography variant="subtitle1">{turnMessage}</Typography>
+        </div>
+        <div className="card-body">
+          <Graveyard graveyard={props.player ? props.player.graveyard : []} />
         </div>
       </Card>
     </div>

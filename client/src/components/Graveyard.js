@@ -1,20 +1,28 @@
-import React, { useEffect } from 'react';
-import '../index.css';
+import React from "react";
+import "../index.css";
+
+import Cell from "./Cell";
 
 //TODO: add status to pieces
 
 export const Graveyard = (props) => {
   let dead = [];
-  let pieceClass = props.piece ? props.piece.color: '';
-  let pieceType = props.piece ? props.piece.type: '';
-  // let pieceStatus = props.piece ? props.piece.status: '';
-  
+  console.log("GRAVEYARD");
+  console.log(props.graveyard);
 
-  // useEffect() = props = {
-  //   if (pieceStatus = 'dead') {
-  //     dead.push(pieceClass, pieceType);
-  //   }
-  // };
+  props.graveyard.forEach((piece) => {
+    let pieceType = piece.type;
+    let pieceColor = piece.color;
+    dead.push(
+      <li>
+        <div className={`square piece column ${pieceType} ${pieceColor}`}></div>
+      </li>
+    );
+  });
 
-  return <div className="graveyard">{dead}</div>;
+  return (
+    <div className="graveyard">
+      <ul>{dead}</ul>
+    </div>
+  );
 };

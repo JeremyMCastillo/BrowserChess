@@ -146,6 +146,18 @@ BoardSchema.methods.setPiece = function (piece) {
 // Moves a piece from one cell to another
 // TODO: Need to check if move is valid and also update graveyards if piece is captured
 BoardSchema.methods.movePiece = function (piece, cell) {
+  // Check if a piece needs to be added to a player's graveyard
+  var foundPiece = this.matrix[cell.x][cell.y].piece;
+  if (foundPiece !== null) {
+    if (this.player_1.color == foundPiece.color) {
+      this.player_1.graveyard.push(foundPiece);
+      this.markModified("player_1");
+    } else {
+      this.player_2.graveyard.push(foundPiece);
+      this.markModified("player_2");
+    }
+  }
+
   this.matrix[piece.x][piece.y].piece = null;
   piece.x = cell.x;
   piece.y = cell.y;
@@ -159,7 +171,7 @@ BoardSchema.methods.isEmpty = function () {
 
 function makeid(length) {
   var result = "";
-  var characters = "ABCDEFGHIJKLMNOPQRSTUVWXYZ0123456789";
+  const characters = "ABCDEFGHIJKLMNOPQRSTUVWXYZ0123456789";
   var charactersLength = characters.length;
   for (var i = 0; i < length; i++) {
     result += characters.charAt(Math.floor(Math.random() * charactersLength));
