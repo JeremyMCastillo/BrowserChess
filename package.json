@@ -35,7 +35,7 @@
     "mongoose": "^5.9.18",
     "redux": "^4.0.5",
     "redux-thunk": "^2.3.0",
-    "socket.io": "^2.3.0",
+    "socket.io": "^2.4.0",
     "winston": "^3.2.1",
     "winston-daily-rotate-file": "^4.4.2"
   },
